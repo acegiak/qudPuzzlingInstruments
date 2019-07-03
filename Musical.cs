@@ -15,6 +15,9 @@ namespace XRL.World.Parts
 	[Serializable]
 	public class acegiak_Musical : IPart
 	{
+        public string SoundName;
+        public string NoteSequence;
+
 		public override bool AllowStaticRegistration()
 		{
 			return true;
@@ -35,38 +38,27 @@ namespace XRL.World.Parts
 			}
 			if (E.ID == "InvCommandPlayTune")
 			{
-                PlaySound("Level_Up_Other",1f,1f,1.5f);
+                PlaySound();
 				E.RequestInterfaceExit();
 			}
 			return base.FireEvent(E);
 		}
 
 
-        public void PlaySound(string Name, float Volume, float LowPass, float Pitch)
+        public void PlaySound()
         {
-            IPart.AddPlayerMessage("Playing: "+Name);
             UnityEngine.GameObject gameObject;
-            // if (SoundManager.AudioSourcePool.Count > 0)
-            // {
-            //     gameObject = SoundManager.AudioSourcePool.Dequeue();
-            // }
-            // else
-            // {
-                gameObject = new UnityEngine.GameObject();
-                gameObject.transform.position = new Vector3(0f, 0f, 1f);
-                gameObject.name = "PooledWorldSound";
-                gameObject.AddComponent<AudioSource>();
-                gameObject.AddComponent<AudioLowPassFilter>();
-                UnityEngine.Object.DontDestroyOnLoad(gameObject);
-            //}
-            AudioSource component = gameObject.GetComponent<AudioSource>();
-            AudioLowPassFilter component2 = gameObject.GetComponent<AudioLowPassFilter>();
-            component.clip = SoundManager.GetClip(Name);
-            component.volume = Volume;
-            component.pitch = Pitch;
-            component2.cutoffFrequency = 22000f * LowPass * Volume;
-            //SoundManager.PlayingAudioSources.Enqueue(gameObject);
+            gameObject = new UnityEngine.GameObject();
+            gameObject.transform.position = new Vector3(0f, 0f, 1f);
+            gameObject.name = "MusicPlayer";
+            gameObject.AddComponent<acegiak_AudioSequencer>();
+            UnityEngine.Object.DontDestroyOnLoad(gameObject);
+
+            acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
+            component.Read(SoundName,NoteSequence);
             component.Play();
+            //}
+            
         }
 	}
 }
