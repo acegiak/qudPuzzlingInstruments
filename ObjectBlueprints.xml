@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+  <object Name="Puzzling Instrument" Inherits="Tool">
+    <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="Tiles/sw_box.bmp" ColorString="&amp;c" DetailColor="C"></part>
+    <part Name="Description" Short="A strange musical contraption"></part>
+    <part Name="Metal"></part>
+    <part Name="acegiak_Musical"></part>
+  </object>
+  </objects>
