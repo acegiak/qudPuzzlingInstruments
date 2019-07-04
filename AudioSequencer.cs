@@ -53,16 +53,35 @@ public class acegiak_Note{
         UnityEngine.Object.Destroy(_voiceHolder);
         _voiceHolder = null;
     }
+
+    public string ToString(){
+        return Math.Round(acegiak_AudioSequencer.baseHz*pitch,3).ToString()+","+Math.Round(begin,3).ToString()+","+Math.Round(length,3).ToString()+";";
+    }
 }
 
 
 public class acegiak_AudioSequencer : MonoBehaviour
 {
+    public static float baseHz=220f;
     public List<acegiak_Note> notes;
     public float? time = null;
+    public float? Rtime = null;
     public GameObject GO;
     public void Play(){
         time = 0;
+    }
+
+    public void Record(){
+        Rtime = 0;
+        notes = new List<acegiak_Note>();
+        Debug.Log("STARTED RECORDING");
+    }
+    public string Print(){
+        string ret = "";
+        foreach(acegiak_Note note in notes){
+            ret += note.ToString();
+        }
+        return ret;
     }
     
     public void Update()
@@ -81,6 +100,41 @@ public class acegiak_AudioSequencer : MonoBehaviour
 
             time += Time.deltaTime;
         }
+
+        if(Rtime != null){
+            for(int i=0;i<10;i++){
+                float rtime = Rtime ?? 0f;
+                if (Input.GetKeyDown(i.ToString())){
+                    if(notes.Count == 0){
+                        Rtime = 0.01f;
+                        rtime = 0.01f;
+                    }
+                    acegiak_Note note =  new acegiak_Note("oboe",HzToMulti((i+1)*110f),rtime,0f);
+                    note.Play();
+                    notes.Add(note);
+                    Debug.Log("START: "+i.ToString() );
+                }
+                if (Input.GetKeyUp(i.ToString())){
+                    foreach(acegiak_Note note in notes){
+                        if(note.pitch == HzToMulti((i+1)*110f) && note.length == 0){
+                            note.length = rtime - note.begin;
+                            note.Stop();
+
+                            Debug.Log("END: "+i.ToString() );
+                        }
+                    }
+                }
+            }
+            if (Input.GetKeyDown("return")){
+                Rtime = null;
+            }
+
+            Rtime += Time.deltaTime;
+        }
+
+
+
+
     }
 
     public void Read(string SampleName, string NoteSequence){
@@ -96,7 +150,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
     public float ParseFloat(string f){
         return (float)double.Parse(f,System.Globalization.NumberStyles.AllowDecimalPoint);
     }
-    public float HzToMulti(float targetHz, float baseHz=220f){
+    public float HzToMulti(float targetHz){
         return targetHz/baseHz;
     }
 }

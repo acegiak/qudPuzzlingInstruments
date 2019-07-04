@@ -4,6 +4,9 @@
     <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="Tiles/sw_box.bmp" ColorString="&amp;c" DetailColor="C"></part>
     <part Name="Description" Short="A strange musical contraption"></part>
     <part Name="Metal"></part>
-    <part Name="acegiak_Musical" SoundName="Level_Up_Other" NoteSequence="330,0.1,1;440,0.5,1;550,1,3;"></part>
+    <part Name="acegiak_Musical" SoundName="oboe"></part>
+  </object>
+  <object Name="Creature" Load="Merge">
+    <part Name="acegiak_SongBook"/>
   </object>
   </objects>
