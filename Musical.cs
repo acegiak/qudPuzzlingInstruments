@@ -9,6 +9,7 @@ using UnityEngine;
 using XRL;
 using XRL.Core;
 using XRL.Rules;
+using ConsoleLib.Console;
 
 namespace XRL.World.Parts
 {
@@ -83,7 +84,19 @@ namespace XRL.World.Parts
 
             acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
 			component.Record();
-			Popup.AskString("Use number keys to play.","",140);
+
+			acegiak_ScreenBufferMaker p = delegate(ScreenBuffer sb, int charcode)
+				{
+					ConsoleChar c = new ConsoleChar();
+					c.Tile = "Tiles/sw_box.bmp";
+					sb[1,1] = c;
+					ConsoleChar f = new ConsoleChar();
+					f.Tile = "Tiles/sw_box.bmp";
+					sb[3,3] = f;
+					//IPart.AddPlayerMessage("Boxy?");
+					return sb;
+				};
+			acegiak_CustomPopup.CustomRender(p,20,10);
 			string songname = Popup.AskString("Name this song. (leave blank to forget)","",140);
 			if(songname != null && songname.Length > 0){
 				acegiak_SongBook book = who.GetPart<acegiak_SongBook>();
