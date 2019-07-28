@@ -89,6 +89,7 @@ namespace XRL.World.Parts
 			foreach(UnityEngine.GameObject GO in GOs){
 				GO.GetComponent<acegiak_AudioSequencer>().Play();
 			}
+			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
         }
 
 
@@ -163,6 +164,10 @@ namespace XRL.World.Parts
 
 		public acegiak_Song ChooseSong(GameObject who){
 			acegiak_SongBook part2 = who.GetPart<acegiak_SongBook>();
+			if(!who.IsPlayer()){
+				return part2.Songs.GetRandomElement();
+			}
+
 			IPart.AddPlayerMessage(part2.ToString());
             List<acegiak_Song> ObjectChoices = new List<acegiak_Song>();
             List<string> ChoiceList = new List<string>();
