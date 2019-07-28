@@ -12,6 +12,8 @@ public class acegiak_Note{
     public float begin;
     public float length;
 
+    public float volume = 1f;
+
     private GameObject _voiceHolder;
     public AudioSource voice{
         get{
@@ -22,7 +24,7 @@ public class acegiak_Note{
                 gameObject.name = "PuzzlingInstrumentSound";
                 gameObject.AddComponent<AudioSource>();
                 gameObject.AddComponent<AudioLowPassFilter>();
-                gameObject.GetComponent<AudioLowPassFilter>().cutoffFrequency = 22000f * (0.15f + 0.55f) * 1f;
+                gameObject.GetComponent<AudioLowPassFilter>().cutoffFrequency = 22000f * 0.7f;
                 gameObject.GetComponent<AudioSource>().clip = SoundManager.GetClip("Level_Up_Other");
                 gameObject.GetComponent<AudioSource>().pitch = 1f;
                 gameObject.GetComponent<AudioSource>().volume = 1f;
@@ -45,9 +47,10 @@ public class acegiak_Note{
         voice.clip = SoundManager.GetClip(sample);
         voice.pitch = this.pitch;
         voice.loop = true;
-        voice.volume = 1f;
+        voice.volume = this.volume;
         voice.Play();
     }
+
     public void Stop(){
         voice.Stop();
         UnityEngine.Object.Destroy(_voiceHolder);
@@ -67,6 +70,9 @@ public class acegiak_AudioSequencer : MonoBehaviour
     public float? time = null;
     public float? Rtime = null;
     public GameObject GO;
+
+    public string recordVoice = "oboe";
+    public float recordVolume = 1f;
     public void Play(){
         time = 0;
     }
@@ -109,7 +115,8 @@ public class acegiak_AudioSequencer : MonoBehaviour
                         Rtime = 0.01f;
                         rtime = 0.01f;
                     }
-                    acegiak_Note note =  new acegiak_Note("oboe",HzToMulti((i+1)*110f),rtime,0f);
+                    acegiak_Note note =  new acegiak_Note(recordVoice,HzToMulti((i+1)*110f),rtime,0f);
+                    note.volume = recordVolume;
                     note.Play();
                     notes.Add(note);
                     Debug.Log("START: "+i.ToString() );
@@ -132,17 +139,24 @@ public class acegiak_AudioSequencer : MonoBehaviour
             Rtime += Time.deltaTime;
         }
 
-
-
-
     }
 
-    public void Read(string SampleName, string NoteSequence){
+    public void Read(string SampleName, string NoteSequence, string _volume){
+        float volume = 1f;
+        if(_volume != null && _volume != String.Empty){
+            volume = Int32.Parse(_volume)/100f;
+        }
         this.notes = new List<acegiak_Note>();
         foreach(string note in NoteSequence.Split(';')){
             if(note != null && note.Length > 0){
                 string[] parts = note.Split(',');
-                this.notes.Add(new acegiak_Note(SampleName,HzToMulti(ParseFloat(parts[0])),ParseFloat(parts[1]),ParseFloat(parts[2])));
+                acegiak_Note noot = new acegiak_Note(SampleName,HzToMulti(ParseFloat(parts[0])),ParseFloat(parts[1]),ParseFloat(parts[2]));
+                if(parts.Length > 3){
+                    noot.volume = volume*ParseFloat(parts[3]);
+                }else{
+                    noot.volume = volume;
+                }
+                this.notes.Add(noot);
             }
         }
     }

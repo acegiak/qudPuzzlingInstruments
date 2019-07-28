@@ -58,32 +58,59 @@ namespace XRL.World.Parts
 
         public void PlaySong(GameObject player)
         {
-            UnityEngine.GameObject gameObject;
-            gameObject = new UnityEngine.GameObject();
-            gameObject.transform.position = new Vector3(0f, 0f, 1f);
-            gameObject.name = "MusicPlayer";
-            gameObject.AddComponent<acegiak_AudioSequencer>();
-            UnityEngine.Object.DontDestroyOnLoad(gameObject);
-
-            acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
 			acegiak_Song song = ChooseSong(player);
-            component.Read(SoundName,song.Notes);
-            component.Play();
-            
+
+			List<UnityEngine.GameObject> GOs = new List<UnityEngine.GameObject>();
+			foreach(string voice in SoundName.Split(';')){
+				string[] bits = voice.Split(':');
+
+				UnityEngine.GameObject gameObject;
+				gameObject = new UnityEngine.GameObject();
+				gameObject.transform.position = new Vector3(0f, 0f, 1f);
+				gameObject.name = "MusicPlayer";
+				gameObject.AddComponent<acegiak_AudioSequencer>();
+				UnityEngine.Object.DontDestroyOnLoad(gameObject);
+
+				acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
+				
+				if(bits.Length >0){
+					component.Read(bits[0],song.Notes, bits[1]);
+				}else{
+					component.Read(bits[0],song.Notes, String.Empty);
+				}
+				GOs.Add(gameObject);
+			}
+			foreach(UnityEngine.GameObject GO in GOs){
+				GO.GetComponent<acegiak_AudioSequencer>().Play();
+			}
         }
 
 
         public void Compose(GameObject who)
         {
-            UnityEngine.GameObject gameObject;
-            gameObject = new UnityEngine.GameObject();
-            gameObject.transform.position = new Vector3(0f, 0f, 1f);
-            gameObject.name = "MusicPlayer";
-            gameObject.AddComponent<acegiak_AudioSequencer>();
-            UnityEngine.Object.DontDestroyOnLoad(gameObject);
 
-            acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
-			component.Record();
+			List<UnityEngine.GameObject> GOs = new List<UnityEngine.GameObject>();
+			foreach(string voice in SoundName.Split(';')){
+				string[] bits = voice.Split(':');
+
+				UnityEngine.GameObject gameObject;
+				gameObject = new UnityEngine.GameObject();
+				gameObject.transform.position = new Vector3(0f, 0f, 1f);
+				gameObject.name = "MusicPlayer";
+				gameObject.AddComponent<acegiak_AudioSequencer>();
+				gameObject.GetComponent<acegiak_AudioSequencer>().recordVoice = bits[0];
+				if(bits.Length>1){
+					gameObject.GetComponent<acegiak_AudioSequencer>().recordVolume = Int32.Parse(bits[1])/100f;
+				}
+				UnityEngine.Object.DontDestroyOnLoad(gameObject);
+
+				GOs.Add(gameObject);
+			}
+
+			foreach(UnityEngine.GameObject GO in GOs){
+				acegiak_AudioSequencer component = GO.GetComponent<acegiak_AudioSequencer>();
+				component.Record();
+			}
 
 			acegiak_ScreenBufferMaker p = delegate(ScreenBuffer sb, int charcode)
 				{
@@ -93,7 +120,7 @@ namespace XRL.World.Parts
 					ConsoleChar f = new ConsoleChar();
 					f.Tile = "Tiles/sw_box.bmp";
 					sb[3,3] = f;
-					//IPart.AddPlayerMessage("Boxy?");
+					IPart.AddPlayerMessage("Boxy?");
 					return sb;
 				};
 			acegiak_CustomPopup.CustomRender(p,20,10);
@@ -105,7 +132,7 @@ namespace XRL.World.Parts
 				}else{
 					acegiak_Song song = new acegiak_Song();
 					song.Name = songname;
-					song.Notes = component.Print();
+					song.Notes = GOs[0].GetComponent<acegiak_AudioSequencer>().Print();
 					book.Songs.Add(song);
 				}
 				

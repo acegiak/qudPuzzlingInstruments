@@ -15,6 +15,7 @@ namespace XRL.World.Parts
 	[Serializable]
 	public class acegiak_SongBook : IPart
 	{
+        [NonSerialized]
         public List<acegiak_Song> Songs = new List<acegiak_Song>();
 
         public acegiak_SongBook(){
