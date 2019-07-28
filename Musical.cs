@@ -79,7 +79,7 @@ namespace XRL.World.Parts
 
 				acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
 				
-				if(bits.Length >0){
+				if(bits.Length >1){
 					component.Read(bits[0],song.Notes, bits[1]);
 				}else{
 					component.Read(bits[0],song.Notes, String.Empty);
