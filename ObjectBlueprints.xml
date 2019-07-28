@@ -12,6 +12,12 @@
     <part Name="Metal"></part>
     <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
   </object>
+  <object>
+  <part Name="Render" DisplayName="&amp;cinstrument2" Tile="items/horn_01.png" ColorString="&amp;c" DetailColor="C"></part>
+  <part Name="Description" Short="A strange musical contraption"></part>
+  <part Name="Metal"></part>
+  <part Name="acegiak_Musical" SoundName="inst2_high"></part>
+  </object>
   <object Name="Creature" Load="Merge">
     <part Name="acegiak_SongBook"/>
   </object>
