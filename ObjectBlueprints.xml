@@ -7,10 +7,10 @@
     <part Name="acegiak_Musical" SoundName="oboe"></part>
   </object>
   <object Name="New Instrument" Inherits="Tool">
-    <part Name="Render" DisplayName="&amp;cnew instrument" Tile="items/horn_01.png" ColorString="&amp;c" DetailColor="C"></part>
+    <part Name="Render" DisplayName="&amp;cnew instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
     <part Name="Description" Short="A strange musical contraption"></part>
     <part Name="Metal"></part>
-    <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75"></part>
+    <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
   </object>
   <object Name="Creature" Load="Merge">
     <part Name="acegiak_SongBook"/>

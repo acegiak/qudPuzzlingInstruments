@@ -36,5 +36,13 @@ namespace XRL.World.Parts
             }
             return ret;
         }
+
+
+        public void BuildSong(){
+            if(ParentObject.GetPart<Inventory>() == null){
+                
+            }
+        }
+
     }
 }

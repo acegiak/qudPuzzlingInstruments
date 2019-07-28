@@ -19,6 +19,9 @@ namespace XRL.World.Parts
         public string SoundName;
         public string NoteSequence;
 
+		public bool Generate = false;
+
+
 		public override bool AllowStaticRegistration()
 		{
 			return true;
@@ -26,6 +29,9 @@ namespace XRL.World.Parts
 
 		public override void Register(GameObject Object)
 		{
+			if(Generate){
+				BuildRandom();
+			}
 			Object.RegisterPartEvent(this, "GetInventoryActions");
 			Object.RegisterPartEvent(this, "InvCommandPlayTune");
 			Object.RegisterPartEvent(this, "InvCommandComposeTune");
@@ -120,7 +126,7 @@ namespace XRL.World.Parts
 					ConsoleChar f = new ConsoleChar();
 					f.Tile = "Tiles/sw_box.bmp";
 					sb[3,3] = f;
-					IPart.AddPlayerMessage("Boxy?");
+					//IPart.AddPlayerMessage("Boxy?");
 					return sb;
 				};
 			acegiak_CustomPopup.CustomRender(p,20,10);
@@ -183,6 +189,25 @@ namespace XRL.World.Parts
                 return null;
             }
 			return ObjectChoices[num12];
+		}
+
+		public void BuildRandom(){
+
+			List<string> tiles = new List<string>{"items/horn_01.png","items/percussion_01.png","items/rattle_01.png","items/stringed_01.png","items/wind_01.png"};
+			List<string> voices = new List<string>{"oboe","inst1_breath","inst2_high"};
+
+			ParentObject.pRender.Tile = tiles.GetRandomElement();
+			Double d = Stat.Rnd2.NextDouble()*3;
+			this.SoundName = "";
+			for(int i = 0; i<d;i++){
+				if(i >0){
+					this.SoundName += ";";
+				}
+				this.SoundName += voices.GetRandomElement();
+				int tvol = Stat.Rnd2.Next(50)+25;
+				this.SoundName = this.SoundName+":"+tvol.ToString();
+				Debug.Log(this.SoundName);
+			}
 		}
 	}
 }
