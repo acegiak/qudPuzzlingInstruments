@@ -32,21 +32,25 @@
         </part>
     </object>
     
+    <object Name="BaseInstrument" Inherits="Tool">
+        <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
+        <part Name="Description" Short="A strange musical contraption"></part>
+        <part Name="Metal"></part>
+        <tag Name="BaseObject" Value="*noinherit" />
+    </object>
 
 
-    <object Name="Puzzling Instrument" Inherits="Tool">
+    <object Name="Puzzling Instrument" Inherits="BaseInstrument">
       <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="Tiles/sw_box.bmp" ColorString="&amp;c" DetailColor="C"></part>
-      <part Name="Description" Short="A strange musical contraption"></part>
-      <part Name="Metal"></part>
       <part Name="acegiak_Musical" SoundName="oboe"></part>
     </object>
-    <object Name="New Instrument" Inherits="Tool">
+    <object Name="New Instrument" Inherits="BaseInstrument">
       <part Name="Render" DisplayName="&amp;cnew instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
       <part Name="Description" Short="A strange musical contraption"></part>
       <part Name="Metal"></part>
       <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
     </object>
-    <object Name="Instrument2" Inherits="Tool">
+    <object Name="Instrument2" Inherits="BaseInstrument">
     <part Name="Render" DisplayName="&amp;cinstrument2" Tile="items/horn_01.png" ColorString="&amp;c" DetailColor="C"></part>
     <part Name="Description" Short="A strange musical contraption"></part>
     <part Name="Metal"></part>
@@ -54,5 +58,8 @@
     </object>
     <object Name="Creature" Load="Merge">
       <part Name="acegiak_SongBook"/>
+    </object>
+    <object Name="BaseWatervineFarmer" Load="Merge">
+        <inventoryobject Blueprint="New Instrument" Number="1" />
     </object>
   </objects>

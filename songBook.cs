@@ -19,7 +19,9 @@ namespace XRL.World.Parts
 	public class acegiak_SongBook : IPart
 	{
         [NonSerialized]
-        public List<acegiak_Song> Songs = new List<acegiak_Song>();
+        public List<GameObject> Songs = new List<GameObject>();
+
+        public long lastPlayed =0;
 
         public acegiak_SongBook(){
             if(GameObjectFactory.Factory == null || GameObjectFactory.Factory.BlueprintList == null){
@@ -31,7 +33,7 @@ namespace XRL.World.Parts
 				{
 					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
                     if(sample.GetPart<acegiak_Song>() != null){
-                        Songs.Add(sample.GetPart<acegiak_Song>());
+                        Songs.Add(sample);
                     }
 				}
 			}
@@ -40,8 +42,8 @@ namespace XRL.World.Parts
 
         public string ToString(){
             string ret = "SONGS:";
-            foreach(acegiak_Song song in Songs){
-                ret += "\n"+song.ToString();
+            foreach(GameObject song in Songs){
+                ret += "\n"+song.GetPart<acegiak_Song>().ToString();
             }
             return ret;
         }
@@ -63,9 +65,13 @@ namespace XRL.World.Parts
 		{
             if(E.ID=="AIBored"){
                 if(ParentObject.GetPart<Inventory>() != null){
-                    foreach(GameObject GO in ParentObject.GetPart<Inventory>().GetObjects()){
-                        if(GO.GetPart<acegiak_Musical>() != null){
-                            GO.FireEvent(XRL.World.Event.New("InvCommandPlayTune", "Owner", ParentObject,"Object",GO));
+                    if(XRLCore.Core.Game.TimeTicks - lastPlayed > 12){
+                        lastPlayed = XRLCore.Core.Game.TimeTicks;
+                    
+                        foreach(GameObject GO in ParentObject.GetPart<Inventory>().GetObjects()){
+                            if(GO.GetPart<acegiak_Musical>() != null){
+                                GO.FireEvent(XRL.World.Event.New("InvCommandPlayTune", "Owner", ParentObject,"Object",GO));
+                            }
                         }
                     }
                 }
