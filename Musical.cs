@@ -201,7 +201,7 @@ namespace XRL.World.Parts
 			return ObjectChoices[num12];
 		}
 
-		public void BuildRandom(){
+		public void BuildRandom(string faction = null){
 
 			List<string> tiles = new List<string>{"items/horn_01.png","items/percussion_01.png","items/rattle_01.png","items/stringed_01.png","items/wind_01.png"};
 			List<string> voices = new List<string>{"oboe","inst1_breath","inst2_high"};

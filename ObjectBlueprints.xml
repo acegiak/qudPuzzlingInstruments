@@ -31,6 +31,15 @@
         Notes="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;220,2.45,1;264,3.45,1;220,4,2">
         </part>
     </object>
+
+    <object Name="InstrumentBit" Inherits="DataBucket"></object>
+
+    <object Name="WindBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="face,body,missileweapon,tradegoods">
+      <tag Name="musicsounds" Value="inst1_breath,inst2_high,oboe">
+      <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png">
+    </object>
+
     
     <object Name="BaseInstrument" Inherits="Tool">
         <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>

@@ -79,10 +79,36 @@ namespace XRL.World.Parts
             return base.FireEvent(E);
         }
 
-        public void BuildSong(){
-            if(ParentObject.GetPart<Inventory>() == null){
-                
+
+        public static List<string> FactionTags(string factionName){
+            GameObject sample = EncountersAPI.GetASampleCreatureFromFaction(factionName);
+            return FromCreatureTags(sample);
+        }
+
+        public static List<string> FromCreatureTags(GameObject sample){
+            List<string> tags = new List<string>();
+            if(sample == null){
+                return tags;
             }
+
+            if(sample.GetPart<Inventory>() != null){
+                GameObject samplePossession = sample.GetPart<Inventory>().GetObjects().GetRandomElement();
+                if(samplePossession != null && samplePossession.pPhysics != null){
+                    tags.Add(samplePossession.pPhysics.Category);
+
+                }
+            }
+
+            if(sample.GetPart<Body>() != null && sample.GetPart<Body>().Part){
+                BodyPart samplePart = sample.GetPart<Body>().GetParts().GetRandomElement();
+                if(samplePart != null){
+                    tags.Add(samplePart.Type);
+                }
+            }
+
+            tags.Add(sample.pRender.GetForegroundColor());
+            tags.Add(sample.pRender.DetailColor);
+
         }
 
     }
