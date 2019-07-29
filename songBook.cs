@@ -11,6 +11,8 @@ using XRL.Core;
 using XRL.Rules;
 using Qud.API;
 using XRL.World;
+using System.Linq;
+using HistoryKit;
 
 
 namespace XRL.World.Parts
@@ -82,6 +84,7 @@ namespace XRL.World.Parts
 
         public static List<string> FactionTags(string factionName){
             GameObject sample = EncountersAPI.GetASampleCreatureFromFaction(factionName);
+            //IPart.AddPlayerMessage(factionName);
             return FromCreatureTags(sample);
         }
 
@@ -99,8 +102,8 @@ namespace XRL.World.Parts
                 }
             }
 
-            if(sample.GetPart<Body>() != null && sample.GetPart<Body>().Part){
-                BodyPart samplePart = sample.GetPart<Body>().GetParts().GetRandomElement();
+            if(sample.GetPart<Body>() != null){
+                BodyPart samplePart = sample.GetPart<Body>().GetParts().Where(p=>!p.Extrinsic && !p.Abstract).GetRandomElement();
                 if(samplePart != null){
                     tags.Add(samplePart.Type);
                 }
@@ -108,6 +111,7 @@ namespace XRL.World.Parts
 
             tags.Add(sample.pRender.GetForegroundColor());
             tags.Add(sample.pRender.DetailColor);
+            return tags;
 
         }
 

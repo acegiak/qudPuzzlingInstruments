@@ -35,9 +35,28 @@
     <object Name="InstrumentBit" Inherits="DataBucket"></object>
 
     <object Name="WindBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="face,body,missileweapon,tradegoods">
-      <tag Name="musicsounds" Value="inst1_breath,inst2_high,oboe">
-      <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png">
+      <tag Name="musictags" Value="Face,Body,Missile Weapon,Trade Goods"/>
+      <tag Name="musicsounds" Value="inst1_breath,inst2_high,oboe"/>
+      <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png"/>
+      <tag Name="prefixes" Value="whistl,wind,breez,breath"/>
+      <tag Name="postfixes" Value="whistl,wind,breez,breath"/>
+      <tag Name="postfixes" Value="boe"/>
+    </object>
+
+    <object Name="PercussionBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicsounds" Value="inst1_breath"/>
+      <tag Name="musictiles" Value="items/percussion_01.png,items/rattle_01.png"/>
+      <tag Name="prefixes" Value="drum,bang,slap,shak"/>
+      <tag Name="postfixes" Value="drum,tom,ngo"/>
+    </object>
+
+    <object Name="StringBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="Face,Body,Missile Weapon,Trade Goods"/>
+      <tag Name="musicsounds" Value="oboe"/>
+      <tag Name="musictiles" Value="items/stringed_01.png"/>
+      <tag Name="prefixes" Value="string,pluck,strum"/>
+      <tag Name="postfixes" Value="tar,re,no,lin,p"/>
     </object>
 
     

@@ -10,6 +10,8 @@ using XRL;
 using XRL.Core;
 using XRL.Rules;
 using ConsoleLib.Console;
+using System.Linq;
+using HistoryKit;
 
 namespace XRL.World.Parts
 {
@@ -30,7 +32,7 @@ namespace XRL.World.Parts
 		public override void Register(GameObject Object)
 		{
 			if(Generate){
-				BuildRandom();
+				BuildRandom(acegiak_SongBook.FactionTags(Factions.GetRandomFactionWithAtLeastOneMember().Name));
 			}
 			Object.RegisterPartEvent(this, "GetInventoryActions");
 			Object.RegisterPartEvent(this, "InvCommandPlayTune");
@@ -201,10 +203,54 @@ namespace XRL.World.Parts
 			return ObjectChoices[num12];
 		}
 
-		public void BuildRandom(string faction = null){
+		public void BuildRandom(List<string> fromtags){
+			//IPart.AddPlayerMessage(String.Join(", ",fromtags.ToArray()));
 
-			List<string> tiles = new List<string>{"items/horn_01.png","items/percussion_01.png","items/rattle_01.png","items/stringed_01.png","items/wind_01.png"};
-			List<string> voices = new List<string>{"oboe","inst1_breath","inst2_high"};
+			List<string> tiles = new List<string>();
+			List<string> voices = new List<string>();
+			List<string> prefixes = new List<string>{"mus","song","ton"};
+			List<string> infixes = new List<string>{"a","i","o"};
+			List<string> postfixes = new List<string>{"phone","tone"};
+
+			List<string> colors = fromtags.Where(b=>b.Length == 1).ToList();
+
+ 			if(GameObjectFactory.Factory == null || GameObjectFactory.Factory.BlueprintList == null){
+                return;
+            }
+			foreach (GameObjectBlueprint blueprint in GameObjectFactory.Factory.BlueprintList)
+			{
+				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("InstrumentBit"))
+				{
+					//IPart.AddPlayerMessage(blueprint.Name);
+					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
+                    if(sample.HasTag("musictags")){
+						List<string> tags = sample.GetTag("musictags").Split(',').ToList();
+						//IPart.AddPlayerMessage(sample.GetTag("musictags"));
+
+						if(fromtags.Where(b=>tags.Contains(b)).Any()){
+
+							//IPart.AddPlayerMessage("do");
+							if(sample.HasTag("musictiles")){
+								tiles = sample.GetTag("musictiles").Split(',').ToList().Union(tiles).ToList();
+							}
+							if(sample.HasTag("musicsounds")){
+								voices = sample.GetTag("musicsounds").Split(',').ToList().Union(voices).ToList();
+							}
+							if(sample.HasTag("prefixes")){
+								prefixes = sample.GetTag("prefixes").Split(',').ToList().Union(prefixes).ToList();
+							}
+							if(sample.HasTag("infixes")){
+								infixes = sample.GetTag("infixes").Split(',').ToList().Union(infixes).ToList();
+							}
+							if(sample.HasTag("postfixes")){
+								postfixes = sample.GetTag("postfixes").Split(',').ToList().Union(postfixes).ToList();
+							}
+						}
+
+					}
+				}
+			}
+
 
 			ParentObject.pRender.Tile = tiles.GetRandomElement();
 			Double d = Stat.Rnd2.NextDouble()*3;
@@ -218,6 +264,24 @@ namespace XRL.World.Parts
 				this.SoundName = this.SoundName+":"+tvol.ToString();
 				Debug.Log(this.SoundName);
 			}
+
+
+			if(colors.Count > 0){
+				ParentObject.pRender.TileColor = "&"+colors.GetRandomElement();
+			}
+			if(colors.Count > 1){
+				ParentObject.pRender.DetailColor = colors.Where(b=>b!= ParentObject.pRender.TileColor.Replace("&","")).GetRandomElement();
+			}
+
+			string newname = prefixes.GetRandomElement();
+			newname += infixes.GetRandomElement();
+			newname += postfixes.GetRandomElement();
+			while(Stat.Rnd2.NextDouble()<0.2f){
+				newname = prefixes.GetRandomElement()+infixes.GetRandomElement()+newname;
+			}
+
+
+			ParentObject.pRender.DisplayName = newname;
 		}
 	}
 }
