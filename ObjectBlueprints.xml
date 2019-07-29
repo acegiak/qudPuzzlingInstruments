@@ -51,6 +51,7 @@
       <tag Name="postfixes" Value="boe"/>
       <tag Name="verbs" Value="blow on,blow into,breathe into,heave into"/>
       <tag Name="parts" Value="tube,pipe,hole,reed,bell"/>
+      <tag Name="descriptors" Value="wind,blown,woodwind"/>
     </object>
 
     <object Name="PercussionBit" Inherits="InstrumentBit">
@@ -61,6 +62,7 @@
       <tag Name="postfixes" Value="drum,tom,ngo"/>
       <tag Name="verbs" Value="bang,tap,bash,strike"/>
       <tag Name="parts" Value="skin,shell,head,casing,face"/>
+      <tag Name="descriptors" Value="percussion,drum-like,beaten"/>
     </object>
 
     <object Name="ShakerBit" Inherits="InstrumentBit">
@@ -71,6 +73,7 @@
       <tag Name="postfixes" Value="ca,ker,ttle"/>
       <tag Name="verbs" Value="shake,rattle,roll"/>
       <tag Name="parts" Value="beads,handle,tines"/>
+      <tag Name="descriptors" Value="shaken,rattled,percussive,beaded"/>
     </object>
 
     <object Name="StringBit" Inherits="InstrumentBit">
@@ -81,6 +84,7 @@
       <tag Name="postfixes" Value="tar,re,no,lin,p"/>
       <tag Name="verbs" Value="pluck,strum,strike"/>
       <tag Name="parts" Value="neck,strings,arm,bridge"/>
+      <tag Name="descriptors" Value="stringed,plucked,strummed,harp-like,lyre-like,lute-like"/>
     </object>
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
@@ -91,6 +95,7 @@
       <tag Name="postfixes" Value="vox,wave"/>
       <tag Name="verbs" Value="activate,adjust,configure"/>
       <tag Name="parts" Value="valve,lever,antenna,EF field,transistor"/>
+      <tag Name="descriptors" Value="complex,technological,electronic"/>
     </object>
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
@@ -101,6 +106,7 @@
       <tag Name="postfixes" Value="bye,singer"/>
       <tag Name="verbs" Value="understand,consider,love,hate,stroke,disgorge"/>
       <tag Name="verbs" Value="sinew,tendon,organ,muscle,mind"/>
+      <tag Name="descriptors" Value="upsetting,living,sentient,otherwordly"/>
     </object>
 
 

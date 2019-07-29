@@ -12,6 +12,7 @@ using XRL.Rules;
 using ConsoleLib.Console;
 using System.Linq;
 using HistoryKit;
+using XRL.Language;
 
 namespace XRL.World.Parts
 {
@@ -216,6 +217,7 @@ namespace XRL.World.Parts
 			List<string> postfixes = new List<string>{"phone","tone"};
 			List<string> verbs = new List<string>{"believe in"};
 			List<string> parts = new List<string>{"body"};
+			List<string> descriptors = new List<string>{"musical"};
 
 			List<string> colors = fromtags.Where(b=>b.Length == 1).ToList();
 
@@ -256,6 +258,9 @@ namespace XRL.World.Parts
 							if(sample.HasTag("verbs")){
 								verbs = sample.GetTag("verbs").Split(',').ToList().Union(verbs).ToList();
 							}
+							if(sample.HasTag("descriptors")){
+								descriptors = sample.GetTag("descriptors").Split(',').ToList().Union(descriptors).ToList();
+							}
 						}
 
 					}
@@ -292,7 +297,7 @@ namespace XRL.World.Parts
 			}
 
 
-			ParentObject.GetPart<Description>().Short = "A musical contraption favoured by "+FactionInfo.getFormattedName(Faction)+". To play it, one "+
+			ParentObject.GetPart<Description>().Short = "A "+descriptors.GetRandomElement()+" instrument favoured by "+FactionInfo.getFormattedName(Faction)+". To play it, one "+
 			verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
 			" the "+parts.GetRandomElement()+((Stat.Rnd2.NextDouble()<0.5f)?(" and the "+parts.GetRandomElement()):"");
 			if(Stat.Rnd2.NextDouble() < 0.5f){
@@ -301,7 +306,7 @@ namespace XRL.World.Parts
 			}
 			ParentObject.GetPart<Description>().Short += ".";
 
-
+			ParentObject.GetPart<Description>().Short = Grammar.ConvertAtoAn(ParentObject.GetPart<Description>().Short);
 
 
 			ParentObject.pRender.DisplayName = newname;
