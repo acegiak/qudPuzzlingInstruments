@@ -51,6 +51,10 @@ namespace XRL.World.Parts
         }
 
 
+			acegiak_Song sleep = new acegiak_Song();
+			sleep.Name = "Go To Sleep";
+			sleep.Notes = "330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2";
+			Songs.Add(sleep);
 
 		public override bool AllowStaticRegistration()
 		{
