@@ -46,9 +46,17 @@
     <object Name="PercussionBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
       <tag Name="musicsounds" Value="inst1_breath"/>
-      <tag Name="musictiles" Value="items/percussion_01.png,items/rattle_01.png"/>
-      <tag Name="prefixes" Value="drum,bang,slap,shak"/>
+      <tag Name="musictiles" Value="items/percussion_01.png"/>
+      <tag Name="prefixes" Value="drum,bang,slap"/>
       <tag Name="postfixes" Value="drum,tom,ngo"/>
+    </object>
+
+    <object Name="ShakerBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicsounds" Value="inst2_high"/>
+      <tag Name="musictiles" Value="items/rattle_01.png"/>
+      <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
+      <tag Name="postfixes" Value="ca,ker,ttle"/>
     </object>
 
     <object Name="StringBit" Inherits="InstrumentBit">
