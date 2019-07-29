@@ -13,6 +13,8 @@ using ConsoleLib.Console;
 using System.Linq;
 using HistoryKit;
 using XRL.Language;
+using System.Text;
+
 
 namespace XRL.World.Parts
 {
@@ -22,7 +24,9 @@ namespace XRL.World.Parts
         public string SoundName;
         public string NoteSequence;
 
-		public string Faction;
+		public string instrumentName;
+
+		public string Faction = null;
 
 		public bool Generate = false;
 
@@ -34,15 +38,44 @@ namespace XRL.World.Parts
 
 		public override void Register(GameObject Object)
 		{
-			if(Generate){
-				this.Faction = Factions.GetRandomFactionWithAtLeastOneMember().Name;
-				BuildRandom(acegiak_SongBook.FactionTags(this.Faction));
-			}
 			Object.RegisterPartEvent(this, "GetInventoryActions");
 			Object.RegisterPartEvent(this, "InvCommandPlayTune");
 			Object.RegisterPartEvent(this, "InvCommandComposeTune");
+			Object.RegisterPartEvent(this,"VisibleStatusColor");
+			Object.RegisterPartEvent(this,"GetDisplayName");
+			Object.RegisterPartEvent(this,"GetShortDisplayName");
+			
 			base.Register(Object);
 		}
+
+		public void Make(GameObject GO = null){
+			if(Faction == null && Generate){
+				IPart.AddPlayerMessage("MAKE INSTRUMENT");
+				this.Faction = Factions.GetRandomFactionWithAtLeastOneMember().Name;
+
+				if(GO == null){
+
+					if(ParentObject.Equipped != null){
+						GO = ParentObject.Equipped;
+					}
+					if(ParentObject.InInventory != null){
+						GO = ParentObject.InInventory;
+					}
+
+				}
+
+				if(GO != null && GO.GetPart<Brain>() != null && GO.GetPart<Brain>().GetPrimaryFaction() != null){
+					this.Faction = GO.GetPart<Brain>().GetPrimaryFaction();
+				}
+
+				BuildRandom(acegiak_SongBook.FactionTags(this.Faction));
+			}
+		}
+
+		// public override bool BeforeRender(Event E){
+		// 	Make();
+		// 	base.BeforeRender(E);
+		// }
 
 		public override bool FireEvent(Event E)
 		{
@@ -64,6 +97,21 @@ namespace XRL.World.Parts
 				Compose(E.GetGameObjectParameter("Owner"));
 				E.RequestInterfaceExit();
 			}
+			// if(E.ID=="BeginBeingTaken"){
+			// 	Make(E.GetGameObjectParameter("TakingObject"));
+			// }
+
+			
+			Make();
+
+			if(E.ID == "GetDisplayName" || E.ID == "GetShortDisplayName"){
+				if(instrumentName != null){
+				E.GetParameter<StringBuilder>("DisplayName").Clear();
+				E.GetParameter<StringBuilder>("DisplayName").Append(instrumentName);
+
+				}
+			}
+			 
 			return base.FireEvent(E);
 		}
 
@@ -310,6 +358,7 @@ namespace XRL.World.Parts
 
 
 			ParentObject.pRender.DisplayName = newname;
+			this.instrumentName = newname;
 		}
 
 		public string verbForm(string verb){
