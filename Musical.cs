@@ -21,6 +21,8 @@ namespace XRL.World.Parts
         public string SoundName;
         public string NoteSequence;
 
+		public string Faction;
+
 		public bool Generate = false;
 
 
@@ -32,7 +34,8 @@ namespace XRL.World.Parts
 		public override void Register(GameObject Object)
 		{
 			if(Generate){
-				BuildRandom(acegiak_SongBook.FactionTags(Factions.GetRandomFactionWithAtLeastOneMember().Name));
+				this.Faction = Factions.GetRandomFactionWithAtLeastOneMember().Name;
+				BuildRandom(acegiak_SongBook.FactionTags(this.Faction));
 			}
 			Object.RegisterPartEvent(this, "GetInventoryActions");
 			Object.RegisterPartEvent(this, "InvCommandPlayTune");
@@ -211,7 +214,7 @@ namespace XRL.World.Parts
 			List<string> prefixes = new List<string>{"mus","song","ton"};
 			List<string> infixes = new List<string>{"a","i","o"};
 			List<string> postfixes = new List<string>{"phone","tone"};
-			List<string> verbs = new List<string>{"believe"};
+			List<string> verbs = new List<string>{"believe in"};
 			List<string> parts = new List<string>{"body"};
 
 			List<string> colors = fromtags.Where(b=>b.Length == 1).ToList();
@@ -246,6 +249,12 @@ namespace XRL.World.Parts
 							}
 							if(sample.HasTag("postfixes")){
 								postfixes = sample.GetTag("postfixes").Split(',').ToList().Union(postfixes).ToList();
+							}
+							if(sample.HasTag("parts")){
+								parts = sample.GetTag("parts").Split(',').ToList().Union(parts).ToList();
+							}
+							if(sample.HasTag("verbs")){
+								verbs = sample.GetTag("verbs").Split(',').ToList().Union(verbs).ToList();
 							}
 						}
 
@@ -283,7 +292,26 @@ namespace XRL.World.Parts
 			}
 
 
+			ParentObject.GetPart<Description>().Short = "A musical contraption favoured by "+FactionInfo.getFormattedName(Faction)+". To play it, one "+
+			verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
+			" the "+parts.GetRandomElement()+((Stat.Rnd2.NextDouble()<0.5f)?(" and the "+parts.GetRandomElement()):"");
+			if(Stat.Rnd2.NextDouble() < 0.5f){
+				ParentObject.GetPart<Description>().Short += " and "+verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
+			" the "+parts.GetRandomElement()+((Stat.Rnd2.NextDouble()<0.5f)?(" and the "+parts.GetRandomElement()):"");
+			}
+			ParentObject.GetPart<Description>().Short += ".";
+
+
+
+
 			ParentObject.pRender.DisplayName = newname;
+		}
+
+		public string verbForm(string verb){
+			string[] words = verb.Split(' ');
+			words[0] = ParentObject.GetVerb(words[0]);
+			return String.Join(" ",words);
+			
 		}
 	}
 }
