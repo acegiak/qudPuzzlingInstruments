@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objects>
+<!-- Body, Head, Face, Back, Arm, Hand, Foot, Hands, Feet, Fungal Outcrop, Fin, Roots, Tail, Tread,  -->
+
+
+  <!-- ===== SONGS ===== -->
+
   <object Name="Song" Inherits="DataBucket"></object>
   
     <object Name="A Celebration Song" Inherits="Song">
@@ -28,44 +33,80 @@
 
     <object Name="Go To Sleep" Inherits="Song">
         <part Name="acegiak_Song"
-        Notes="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;220,2.45,1;264,3.45,1;220,4,2">
+        Notes="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2">
         </part>
     </object>
+
+
+    <!-- ===== INSTRUMENT BITS ===== -->
 
     <object Name="InstrumentBit" Inherits="DataBucket"></object>
 
     <object Name="WindBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Face,Body,Missile Weapon,Trade Goods"/>
-      <tag Name="musicsounds" Value="inst1_breath,inst2_high,oboe"/>
+      <tag Name="musictags" Value="Face,Body,Back,Fin"/>
+      <tag Name="musicsounds" Value="inst2_high"/>
       <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png"/>
       <tag Name="prefixes" Value="whistl,wind,breez,breath"/>
       <tag Name="postfixes" Value="whistl,wind,breez,breath"/>
       <tag Name="postfixes" Value="boe"/>
+      <tag Name="verbs" Value="blow on,blow into,breathe into,heave into"/>
+      <tag Name="parts" Value="tube,pipe,hole,reed,bell"/>
     </object>
 
     <object Name="PercussionBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst1_breath"/>
+      <tag Name="musicsounds" Value="inst2_high,inst4_pah"/>
       <tag Name="musictiles" Value="items/percussion_01.png"/>
       <tag Name="prefixes" Value="drum,bang,slap"/>
       <tag Name="postfixes" Value="drum,tom,ngo"/>
+      <tag Name="verbs" Value="bang,tap,bash,strike"/>
+      <tag Name="parts" Value="skin,shell,head,casing,face"/>
     </object>
 
     <object Name="ShakerBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst2_high"/>
+      <tag Name="musictags" Value="Hand,Hands,Treads,Tail,Arm"/>
+      <tag Name="musicsounds" Value="inst2_bubble"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
       <tag Name="postfixes" Value="ca,ker,ttle"/>
+      <tag Name="verbs" Value="shake,rattle,roll"/>
+      <tag Name="parts" Value="beads,handle,tines"/>
     </object>
 
     <object Name="StringBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Face,Body,Missile Weapon,Trade Goods"/>
-      <tag Name="musicsounds" Value="oboe"/>
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicsounds" Value="inst5_fast"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="string,pluck,strum"/>
       <tag Name="postfixes" Value="tar,re,no,lin,p"/>
+      <tag Name="verbs" Value="pluck,strum,strike"/>
+      <tag Name="parts" Value="neck,strings,arm,bridge"/>
     </object>
+
+    <object Name="ScienceBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="Body,Head,Back,Tread,Tail"/>
+      <tag Name="musicsounds" Value="inst3_birb"/>
+      <tag Name="musictiles" Value="items/stringed_01.png"/>
+      <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
+      <tag Name="postfixes" Value="vox,wave"/>
+      <tag Name="verbs" Value="activate,adjust,configure"/>
+      <tag Name="parts" Value="valve,lever,antenna,EF field,transistor"/>
+    </object>
+
+    <object Name="WeirdBit" Inherits="InstrumentBit">
+      <tag Name="musictags" Value="Body,Head,Fungal Outcrop,Fin,Roots,Tail"/>
+      <tag Name="musicsounds" Value="inst3_robo"/>
+      <tag Name="musictiles" Value="items/rattle_01.png"/>
+      <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
+      <tag Name="postfixes" Value="bye,singer"/>
+      <tag Name="verbs" Value="understand,consider,love,hate,stroke,disgorge"/>
+      <tag Name="verbs" Value="sinew,tendon,organ,muscle,mind"/>
+    </object>
+
+
+
+
+    <!-- ===== INSTRUMENTS ===== -->
 
     
     <object Name="BaseInstrument" Inherits="Tool">
@@ -92,6 +133,10 @@
     <part Name="Metal"></part>
     <part Name="acegiak_Musical" SoundName="inst2_high"></part>
     </object>
+
+
+
+    <!-- ===== SCAFFOLDING ===== -->
     <object Name="Creature" Load="Merge">
       <part Name="acegiak_SongBook"/>
     </object>

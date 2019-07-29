@@ -211,6 +211,8 @@ namespace XRL.World.Parts
 			List<string> prefixes = new List<string>{"mus","song","ton"};
 			List<string> infixes = new List<string>{"a","i","o"};
 			List<string> postfixes = new List<string>{"phone","tone"};
+			List<string> verbs = new List<string>{"believe"};
+			List<string> parts = new List<string>{"body"};
 
 			List<string> colors = fromtags.Where(b=>b.Length == 1).ToList();
 
