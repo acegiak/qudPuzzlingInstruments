@@ -52,7 +52,7 @@ namespace XRL.World.Parts
 		public void Make(GameObject GO = null){
 			if(Faction == null && Generate){
 				Generate = false;
-				IPart.AddPlayerMessage("MAKE INSTRUMENT");
+				//IPart.AddPlayerMessage("MAKE INSTRUMENT");
 				this.Faction = Factions.GetRandomFactionWithAtLeastOneMember().Name;
 
 				if(GO == null){
@@ -112,7 +112,7 @@ namespace XRL.World.Parts
 
         public void PlaySong(GameObject player)
         {
-			GameObject song = ChooseSong(player);
+			acegiak_Song song = ChooseSong(player);
 
 			List<UnityEngine.GameObject> GOs = new List<UnityEngine.GameObject>();
 			foreach(string voice in SoundName.Split(';')){
@@ -128,16 +128,16 @@ namespace XRL.World.Parts
 				acegiak_AudioSequencer component = gameObject.GetComponent<acegiak_AudioSequencer>();
 				
 				if(bits.Length >1){
-					component.Read(bits[0],song.GetPart<acegiak_Song>().Notes, bits[1]);
+					component.Read(bits[0],song.Notes, bits[1]);
 				}else{
-					component.Read(bits[0],song.GetPart<acegiak_Song>().Notes, String.Empty);
+					component.Read(bits[0],song.Notes, String.Empty);
 				}
 				GOs.Add(gameObject);
 			}
 			foreach(UnityEngine.GameObject GO in GOs){
 				GO.GetComponent<acegiak_AudioSequencer>().Play();
 			}
-			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.GetPart<acegiak_Song>().Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
+			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
         }
 
 
@@ -190,10 +190,8 @@ namespace XRL.World.Parts
 					song.Notes = GOs[0].GetComponent<acegiak_AudioSequencer>().Print();
 
 
-					GameObject GO = GameObject.create("Song");
-					GO.AddPart(song);
 
-					book.Songs.Add(GO);
+					book.Songs.Add(song);
 				}
 				
 			}
@@ -215,14 +213,14 @@ namespace XRL.World.Parts
 			}
 		}
 
-		public GameObject ChooseSong(GameObject who){
+		public acegiak_Song ChooseSong(GameObject who){
 			acegiak_SongBook part2 = who.GetPart<acegiak_SongBook>();
 			if(!who.IsPlayer()){
 				return part2.Songs.GetRandomElement();
 			}
 
 			//IPart.AddPlayerMessage(part2.ToString());
-            List<GameObject> ObjectChoices = new List<GameObject>();
+            List<acegiak_Song> ObjectChoices = new List<acegiak_Song>();
             List<string> ChoiceList = new List<string>();
             List<char> HotkeyList = new List<char>();
             char ch = 'a';
@@ -230,10 +228,10 @@ namespace XRL.World.Parts
 				Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("don't")+" know any songs");
 				return null;
 			}
-			foreach(GameObject song in part2.Songs){
+			foreach(acegiak_Song song in part2.Songs){
                     ObjectChoices.Add(song);
                     HotkeyList.Add(ch);
-                    ChoiceList.Add(song.GetPart<acegiak_Song>().Name);
+                    ChoiceList.Add(song.Name);
                     ch = (char)(ch + 1);
             }
             if (ObjectChoices.Count == 0)

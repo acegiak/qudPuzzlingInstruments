@@ -25,45 +25,51 @@
     </object> -->
 
     <object Name="A New Challenge" Inherits="Song">
-        <part Name="acegiak_Song"
-        Notes="440,0.01,0.2;479.996,0.5,0.2;550,1,1;479.996,2,0.2;440,2.2,0.2;479.996,2.4,0.2;440,2.6,0.5">
-        </part>
-        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+        <tag Name="musicnotes"
+        Value="440,0.01,0.2;479.996,0.5,0.2;550,1,1;479.996,2,0.2;440,2.2,0.2;479.996,2.4,0.2;440,2.6,0.5"/>
+        
+        <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
 
     </object>
 
     <object Name="I Love My Pet Rock" Inherits="Song">
-        <part Name="acegiak_Song"
-        Notes="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3">
-        </part>
+        <tag Name="musicnotes"
+        Value="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3"/>
+        
         <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
 
     </object>
 
     <object Name="Go To Sleep" Inherits="Song">
-        <part Name="acegiak_Song"
-        Notes="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2">
-        </part>
+        <tag Name="musicnotes"
+        Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/>
+        
         <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
 
     </object>
 
   <object Name="Beat It" Inherits="Song">
-    <part Name="acegiak_Song"
-    Notes="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7	0.5">
-    </part>
+      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
+    <tag Name="musicnotes"
+    Value="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7	0.5"/>
+    
   </object>
 
   <object Name="Phantom" Inherits="Song">
-    <part Name="acegiak_Song"
-    Notes="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;">
-    </part>
+      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
+    <tag Name="musicnotes"
+    Value="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;"/>
+    
   </object>
 
   <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
-    <part Name="acegiak_Song"
-    Notes="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;">
-    </part>
+      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
+    <tag Name="musicnotes"
+    Value="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;"/>
+    
   </object>
     <!-- ===== INSTRUMENT BITS ===== -->
 
@@ -115,7 +121,7 @@
     </object>
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Body,Head,Back,Tread,Tail"/>
+      <tag Name="musictags" Value="Tread,Tail,Artifacts,Data Disk,Cybernetic Implants,Energy Cell"/>
       <tag Name="musicsounds" Value="inst3_birb,inst_elec_inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
@@ -126,7 +132,7 @@
     </object>
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Body,Head,Fungal Outcrop,Fin,Roots,Tail"/>
+      <tag Name="musictags" Value="Fungal Outcrop,Fin,Roots,Tail,Corpse,Creature,Cybernetic Implants,Nest,Natural Weapon,Natural Missile Weapon,Natural Armor"/>
       <tag Name="musicsounds" Value="inst3_robo,inst9_mari,inst9_squi,inst7_wat"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>

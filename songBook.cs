@@ -21,7 +21,7 @@ namespace XRL.World.Parts
 	public class acegiak_SongBook : IPart
 	{
         [NonSerialized]
-        public List<GameObject> Songs = new List<GameObject>();
+        public List<acegiak_Song> Songs = new List<acegiak_Song>();
 
         public long lastPlayed =0;
 
@@ -44,8 +44,8 @@ namespace XRL.World.Parts
 
         public string ToString(){
             string ret = "SONGS:";
-            foreach(GameObject song in Songs){
-                ret += "\n"+song.GetPart<acegiak_Song>().ToString();
+            foreach(acegiak_Song song in Songs){
+                ret += "\n"+song.ToString();
             }
             return ret;
         }
@@ -57,28 +57,31 @@ namespace XRL.World.Parts
         }
         public void SongsIKnow(){
             if(ParentObject.IsPlayer()){
-                Songs = GetBaseSongs();
+                // Songs = GetBaseSongs().Select(b=>new acegiak);
                 return;
             }
             for(int i = Stat.Rnd2.Next(3);i>0;i--){
-                GameObject song = SongOfMyPeople();
+                acegiak_Song song = SongOfMyPeople();
                 if(song != null){
                     Songs.Add(song);
                 }
             }
         }
 
-        public GameObject SongOfMyPeople(){
+        public acegiak_Song SongOfMyPeople(){
             if(ParentObject == null || ParentObject.GetPart<Brain>() == null || ParentObject.GetPart<Brain>().GetPrimaryFaction() == null){
                 return null;
             }
             List<string> tags = FactionTags(ParentObject.GetPart<Brain>().GetPrimaryFaction());
-            List<GameObject> ElligbleSongs = new List<GameObject>();
+            List<acegiak_Song> ElligbleSongs = new List<acegiak_Song>();
             foreach (GameObject item in GetBaseSongs()){
                 if(item.HasTag("musictags")){
                     List<string> songtags = item.GetTag("musictags").Split(',').ToList();
                     if(tags.Where(b=>songtags.Contains(b)).Any()){
-                        ElligbleSongs.Add(item);
+                        acegiak_Song Song = new acegiak_Song();
+                        Song.Notes = item.GetTag("musicnotes");
+                        Song.Name = item.GetBlueprint().Name;
+                        ElligbleSongs.Add(Song);
                     }
                 }
             }
@@ -88,7 +91,7 @@ namespace XRL.World.Parts
             return MakeItCultural(ElligbleSongs.GetRandomElement(),ParentObject.GetPart<Brain>().GetPrimaryFaction());
         }
 
-        public GameObject MakeItCultural(GameObject song, string faction){
+        public acegiak_Song MakeItCultural(acegiak_Song song, string faction){
             return song;
         }
 
@@ -102,7 +105,7 @@ namespace XRL.World.Parts
 				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("Song"))
 				{
 					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
-                    if(sample.GetPart<acegiak_Song>() != null){
+                    if(sample.HasTag("musicnotes")){
                         BaseSongs.Add(sample);
                     }
 				}
@@ -166,7 +169,7 @@ namespace XRL.World.Parts
 								bool canlearn = XRLCore.Core.Game.PlayerReputation.get(ParentObject.pBrain.GetPrimaryFaction()) >50;
 
 								ConversationChoice conversationChoice = new ConversationChoice();
-								conversationChoice.Text = (canlearn?"&G":"&K")+"Teach me "+this.Songs[0].GetPart<acegiak_Song>().Name+" ["+(canlearn?"&C":"&r")+"-50"+(canlearn?"&G":"&K")+" reputation]";
+								conversationChoice.Text = (canlearn?"&G":"&K")+"Teach me to play &W"+this.Songs[0].Name+(canlearn?"&g":"&K")+" ["+(canlearn?"&C":"&r")+"-50"+(canlearn?"&g":"&K")+" reputation]";
 								conversationChoice.GotoID = "End";
 								conversationChoice.ParentNode = wrnode;
 								conversationChoice.ID = "LearnSong";
@@ -178,7 +181,7 @@ namespace XRL.World.Parts
 									}
                                     XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>().Songs.Add(this.Songs[0]);
 									this.learnedFrom = true;
-									Popup.Show("You learned to play "+this.Songs[0].GetPart<acegiak_Song>().Name);
+									Popup.Show("You learned to play "+this.Songs[0].Name);
 									XRLCore.Core.Game.PlayerReputation.modify(Factions.FactionList[ParentObject.pBrain.GetPrimaryFaction()].Name, -50,false);
 
 									return true;

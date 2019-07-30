@@ -11,22 +11,8 @@ namespace XRL.World.Parts
 [Serializable]
 public class acegiak_Song: IPart{
 
-    public string _name;
-    public string Name{
-        get{
-            if(_name == null){
-                if(ParentObject != null){
-                    _name = ParentObject.GetBlueprint().Name;
-                }else{
-                    _name = "a song";
-                }
-            }
-            return _name;
-        }
-        set{
-            _name = value;
-        }
-    }
+    public string Name;
+    
     public string Notes;
 
     public string ToString(){
