@@ -29,6 +29,7 @@
         Value="440,0.01,0.2;479.996,0.5,0.2;550,1,1;479.996,2,0.2;440,2.2,0.2;479.996,2.4,0.2;440,2.6,0.5"/>
         
         <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
 
     </object>
 
@@ -37,6 +38,7 @@
         Value="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3"/>
         
         <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
 
     </object>
 
@@ -45,6 +47,7 @@
         Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/>
         
         <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
 
     </object>
 
@@ -58,6 +61,7 @@
 
   <object Name="Phantom" Inherits="Song">
       <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
 
     <tag Name="musicnotes"
     Value="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;"/>
@@ -66,6 +70,7 @@
 
   <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
       <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
 
     <tag Name="musicnotes"
     Value="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;"/>

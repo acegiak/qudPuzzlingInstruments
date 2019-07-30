@@ -45,6 +45,9 @@ namespace XRL.World.Parts
 			Object.RegisterPartEvent(this,"VisibleStatusColor");
 			Object.RegisterPartEvent(this,"GetDisplayName");
 			Object.RegisterPartEvent(this,"GetShortDisplayName");
+			Object.RegisterPartEvent(this,"IdleQuery");
+			Object.RegisterPartEvent(this,"CanSmartUse");
+			Object.RegisterPartEvent(this,"CommandSmartUse");
 			
 			base.Register(Object);
 		}
@@ -103,6 +106,30 @@ namespace XRL.World.Parts
 			// 	Make(E.GetGameObjectParameter("TakingObject"));
 			// }
 
+			if (E.ID == "IdleQuery")
+			{
+				GameObject gameObjectParameter = E.GetGameObjectParameter("Object");
+				if (gameObjectParameter.HasPart("Brain") && !gameObjectParameter.HasPart("Robot") && gameObjectParameter.DistanceTo(ParentObject) <= 1 && Stat.Random(1, 10) == 1)
+				{
+					PlaySong(gameObjectParameter);
+				}
+			}
+			if (E.ID == "CanSmartUse")
+			{
+				return false;
+			}
+			if (E.ID == "CommandSmartUse")
+			{
+				//if(E.GetGameObjectParameter("User").GetPart<acegiak_SongBook>() != null){
+					if(E.GetGameObjectParameter("User").GetPart<acegiak_SongBook>().Songs.Count() >0){
+						PlaySong(E.GetGameObjectParameter("User"));
+					}else if(E.GetGameObjectParameter("User").IsPlayer()){
+						Compose(E.GetGameObjectParameter("User"));
+					}
+				//}
+			}
+			
+
 			
 			Make();
 			 
@@ -138,7 +165,17 @@ namespace XRL.World.Parts
 				GO.GetComponent<acegiak_AudioSequencer>().Play();
 			}
 			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
-        }
+			if(song.Effect != null){
+				    
+                    IPart.AddPlayerMessage("Effect:"+song.Effect);
+                    Effect effect = Activator.CreateInstance(Type.GetType(song.Effect)) as Effect;
+					//effect.Duration = Stat.Rnd2.Next(100);
+                    IPart.AddPlayerMessage("Effect:"+effect.DisplayName);
+					player.ApplyEffect(effect);
+			}
+		
+		}
+
 
 
         public void Compose(GameObject who)

@@ -15,6 +15,8 @@ public class acegiak_Song: IPart{
     
     public string Notes;
 
+    public string Effect;
+
     public string ToString(){
         return Name+": "+Notes;
     }

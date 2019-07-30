@@ -81,6 +81,8 @@ namespace XRL.World.Parts
                         acegiak_Song Song = new acegiak_Song();
                         Song.Notes = item.GetTag("musicnotes");
                         Song.Name = item.GetBlueprint().Name;
+                        Song.Effect = item.GetTag("musiceffect");
+                        
                         ElligbleSongs.Add(Song);
                     }
                 }
@@ -220,19 +222,21 @@ namespace XRL.World.Parts
             if(sample == null){
                 return tags;
             }
+            for(int i = 0; i<2;i++){
+                if(sample.GetPart<Inventory>() != null){
+                    GameObject samplePossession = sample.GetPart<Inventory>().GetObjects().GetRandomElement();
+                    if(samplePossession != null && samplePossession.pPhysics != null){
+                        tags.Add(samplePossession.pPhysics.Category);
 
-            if(sample.GetPart<Inventory>() != null){
-                GameObject samplePossession = sample.GetPart<Inventory>().GetObjects().GetRandomElement();
-                if(samplePossession != null && samplePossession.pPhysics != null){
-                    tags.Add(samplePossession.pPhysics.Category);
-
+                    }
                 }
             }
-
-            if(sample.GetPart<Body>() != null){
-                BodyPart samplePart = sample.GetPart<Body>().GetParts().Where(p=>!p.Extrinsic && !p.Abstract).GetRandomElement();
-                if(samplePart != null){
-                    tags.Add(samplePart.Type);
+            for(int i = 0; i<2;i++){
+                if(sample.GetPart<Body>() != null){
+                    BodyPart samplePart = sample.GetPart<Body>().GetParts().Where(p=>!p.Extrinsic && !p.Abstract).GetRandomElement();
+                    if(samplePart != null){
+                        tags.Add(samplePart.Type);
+                    }
                 }
             }
 
