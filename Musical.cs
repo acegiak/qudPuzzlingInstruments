@@ -31,6 +31,7 @@ namespace XRL.World.Parts
 		public bool Generate = false;
 
 
+
 		public override bool AllowStaticRegistration()
 		{
 			return true;
@@ -50,6 +51,7 @@ namespace XRL.World.Parts
 
 		public void Make(GameObject GO = null){
 			if(Faction == null && Generate){
+				Generate = false;
 				IPart.AddPlayerMessage("MAKE INSTRUMENT");
 				this.Faction = Factions.GetRandomFactionWithAtLeastOneMember().Name;
 
@@ -72,10 +74,10 @@ namespace XRL.World.Parts
 			}
 		}
 
-		// public override bool BeforeRender(Event E){
-		// 	Make();
-		// 	base.BeforeRender(E);
-		// }
+		public override bool BeforeRender(Event E){
+			Make();
+			return base.BeforeRender(E);
+		}
 
 		public override bool FireEvent(Event E)
 		{
@@ -103,14 +105,6 @@ namespace XRL.World.Parts
 
 			
 			Make();
-
-			if(E.ID == "GetDisplayName" || E.ID == "GetShortDisplayName"){
-				if(instrumentName != null){
-				E.GetParameter<StringBuilder>("DisplayName").Clear();
-				E.GetParameter<StringBuilder>("DisplayName").Append(instrumentName);
-
-				}
-			}
 			 
 			return base.FireEvent(E);
 		}

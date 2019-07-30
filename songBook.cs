@@ -25,22 +25,22 @@ namespace XRL.World.Parts
 
         public long lastPlayed =0;
 
-        public acegiak_SongBook(){
-            if(GameObjectFactory.Factory == null || GameObjectFactory.Factory.BlueprintList == null){
-                return;
-            }
-			foreach (GameObjectBlueprint blueprint in GameObjectFactory.Factory.BlueprintList)
-			{
-				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("Song"))
-				{
-					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
-                    if(sample.GetPart<acegiak_Song>() != null){
-                        Songs.Add(sample);
-                    }
-				}
-			}
+        public bool learnedFrom = false;
 
+        public bool made = false;
+
+        public Dictionary <string,List<string>> _factionMusicTags = new Dictionary <string,List<string>>();
+
+        public acegiak_SongBook(){
 		}
+
+        public static Dictionary <string,List<string>> factionMusicTags (){
+            if(XRLCore.Core.Game.Player == null || 
+            XRLCore.Core.Game.Player.Body == null ||
+            XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>() == null
+            ){ return null;}
+            return XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()._factionMusicTags;
+        }
 
         public string ToString(){
             string ret = "SONGS:";
@@ -49,7 +49,66 @@ namespace XRL.World.Parts
             }
             return ret;
         }
+        public void Make(){
+            if(!made){
+                made = true;
+                SongsIKnow();
+            }
+        }
+        public void SongsIKnow(){
+            if(ParentObject.IsPlayer()){
+                Songs = GetBaseSongs();
+                return;
+            }
+            for(int i = Stat.Rnd2.Next(3);i>0;i--){
+                GameObject song = SongOfMyPeople();
+                if(song != null){
+                    Songs.Add(song);
+                }
+            }
+        }
 
+        public GameObject SongOfMyPeople(){
+            if(ParentObject == null || ParentObject.GetPart<Brain>() == null || ParentObject.GetPart<Brain>().GetPrimaryFaction() == null){
+                return null;
+            }
+            List<string> tags = FactionTags(ParentObject.GetPart<Brain>().GetPrimaryFaction());
+            List<GameObject> ElligbleSongs = new List<GameObject>();
+            foreach (GameObject item in GetBaseSongs()){
+                if(item.HasTag("musictags")){
+                    List<string> songtags = item.GetTag("musictags").Split(',').ToList();
+                    if(tags.Where(b=>songtags.Contains(b)).Any()){
+                        ElligbleSongs.Add(item);
+                    }
+                }
+            }
+            if(ElligbleSongs.Count() <= 0){
+                return null;
+            }
+            return MakeItCultural(ElligbleSongs.GetRandomElement(),ParentObject.GetPart<Brain>().GetPrimaryFaction());
+        }
+
+        public GameObject MakeItCultural(GameObject song, string faction){
+            return song;
+        }
+
+        public List<GameObject> GetBaseSongs(){
+            List<GameObject> BaseSongs = new List<GameObject>();
+            if(GameObjectFactory.Factory == null || GameObjectFactory.Factory.BlueprintList == null){
+                return BaseSongs;
+            }
+			foreach (GameObjectBlueprint blueprint in GameObjectFactory.Factory.BlueprintList)
+			{
+				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("Song"))
+				{
+					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
+                    if(sample.GetPart<acegiak_Song>() != null){
+                        BaseSongs.Add(sample);
+                    }
+				}
+			}
+            return BaseSongs;
+        }
 
 		public override bool AllowStaticRegistration()
 		{
@@ -59,14 +118,27 @@ namespace XRL.World.Parts
 		public override void Register(GameObject Object)
 		{
 			Object.RegisterPartEvent(this, "AIBored");
+
+			Object.RegisterPartEvent(this, "VisitConversationNode");
+			Object.RegisterPartEvent(this, "ShowConversationChoices");
+
+			Object.RegisterPartEvent(this,"VisibleStatusColor");
+			Object.RegisterPartEvent(this,"GetDisplayName");
+			Object.RegisterPartEvent(this,"GetShortDisplayName");
+			base.Register(Object);
         }
 
+
+		public override bool BeforeRender(Event E){
+			Make();
+			return base.BeforeRender(E);
+		}
 
 		public override bool FireEvent(Event E)
 		{
             if(E.ID=="AIBored"){
                 if(ParentObject.GetPart<Inventory>() != null){
-                    if(XRLCore.Core.Game.TimeTicks - lastPlayed > 12){
+                    if(XRLCore.Core.Game.TimeTicks - lastPlayed > 20){
                         lastPlayed = XRLCore.Core.Game.TimeTicks;
                     
                         foreach(GameObject GO in ParentObject.GetPart<Inventory>().GetObjects()){
@@ -77,14 +149,67 @@ namespace XRL.World.Parts
                     }
                 }
             }
+
+
+
+			if(E.ID == "ShowConversationChoices" ){
+				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null ){
+					if(this.Songs.Count > 0 && !this.learnedFrom ){
+					
+						
+						if(E.GetParameter<ConversationNode>("CurrentNode") != null && E.GetParameter<ConversationNode>("CurrentNode") is WaterRitualNode){
+							WaterRitualNode wrnode = E.GetParameter<ConversationNode>("CurrentNode") as WaterRitualNode;
+							List<ConversationChoice> Choices = E.GetParameter<List<ConversationChoice>>("Choices") as List<ConversationChoice>;
+
+							if(Choices.Where(b=>b.ID == "LearnSong").Count() <= 0){
+
+								bool canlearn = XRLCore.Core.Game.PlayerReputation.get(ParentObject.pBrain.GetPrimaryFaction()) >50;
+
+								ConversationChoice conversationChoice = new ConversationChoice();
+								conversationChoice.Text = (canlearn?"&G":"&K")+"Teach me "+this.Songs[0].GetPart<acegiak_Song>().Name+" ["+(canlearn?"&C":"&r")+"-50"+(canlearn?"&G":"&K")+" reputation]";
+								conversationChoice.GotoID = "End";
+								conversationChoice.ParentNode = wrnode;
+								conversationChoice.ID = "LearnSong";
+								conversationChoice.onAction = delegate()
+								{
+									if(!canlearn){
+										Popup.Show("You do not have enough reputation.");
+										return false;
+									}
+                                    XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>().Songs.Add(this.Songs[0]);
+									this.learnedFrom = true;
+									Popup.Show("You learned to play "+this.Songs[0].GetPart<acegiak_Song>().Name);
+									XRLCore.Core.Game.PlayerReputation.modify(Factions.FactionList[ParentObject.pBrain.GetPrimaryFaction()].Name, -50,false);
+
+									return true;
+								};
+								Choices.Add(conversationChoice);
+								Choices.Sort(new ConversationChoice.Sorter());
+								// wrnode.Choices.Add(conversationChoice);
+								// wrnode.SortEndChoicesToEnd();
+								E.SetParameter("CurrentNode",wrnode);
+							}
+						}
+					
+					}
+				}
+			}
             return base.FireEvent(E);
         }
 
 
         public static List<string> FactionTags(string factionName){
+            if(factionMusicTags() == null){
+                return new List<string>();
+            }
+            if(factionMusicTags().ContainsKey(factionName)){
+                return factionMusicTags()[factionName];
+            }
             GameObject sample = EncountersAPI.GetASampleCreatureFromFaction(factionName);
             //IPart.AddPlayerMessage(factionName);
-            return FromCreatureTags(sample);
+            List<string> tags = FromCreatureTags(sample);
+            factionMusicTags()[factionName] = tags;
+            return tags;
         }
 
         public static List<string> FromCreatureTags(GameObject sample){

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objects>
-<!-- Body, Head, Face, Back, Arm, Hand, Foot, Hands, Feet, Fungal Outcrop, Fin, Roots, Tail, Tread,  -->
+<!-- Body, Head, Face, Back, Arm, Hand, Foot, Hands, Feet, Fungal Outcrop,
+  Fin, Roots, Tail, Tread, Corpse, Artifacts, Missile Weapon, Melee Weapon, Projectile,
+  Armor, Shields, Grenades, Creature, Nest, Natural Weapon, Natural Missile Weapon,
+  Food, Tonics, Applicators, Water Container, Books, Light Source, Ammo, Natural Armor
+  Tools, Trade Goods, Clothes, Quest Items, Meds, Data Disk, Scrap, Trinket, Energy Cell,
+  Terrain, Liquids, Cybernetic Implants, Miscellaneous, Plant, Fungus -->
 
 
   <!-- ===== SONGS ===== -->
 
   <object Name="Song" Inherits="DataBucket"></object>
   
-    <object Name="A Celebration Song" Inherits="Song">
+    <!-- <object Name="A Celebration Song" Inherits="Song">
       <part Name="acegiak_Song"
       Notes="49.23,0.01,0.24;349.23,0.26,0.25;329.63,0.5,0.5;261.63,1,0.5;293.66,1.5,0.5;261.63,2,1;">
       </part>
@@ -17,24 +22,30 @@
       <part Name="acegiak_Song"
       Notes="311.13,0.01,0.5;261.63,0.5,0.5;369.99,1,1.5">
       </part>
-    </object>
+    </object> -->
 
     <object Name="A New Challenge" Inherits="Song">
         <part Name="acegiak_Song"
         Notes="440,0.01,0.2;479.996,0.5,0.2;550,1,1;479.996,2,0.2;440,2.2,0.2;479.996,2.4,0.2;440,2.6,0.5">
         </part>
+        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
     </object>
 
     <object Name="I Love My Pet Rock" Inherits="Song">
         <part Name="acegiak_Song"
         Notes="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3">
         </part>
+        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
     </object>
 
     <object Name="Go To Sleep" Inherits="Song">
         <part Name="acegiak_Song"
         Notes="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2">
         </part>
+        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+
     </object>
 
 
@@ -88,7 +99,7 @@
     </object>
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Body,Head,Back,Tread,Tail"/>
+      <tag Name="musictags" Value="Tread,Artifacts"/>
       <tag Name="musicsounds" Value="inst3_birb"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
@@ -99,7 +110,7 @@
     </object>
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Body,Head,Fungal Outcrop,Fin,Roots,Tail"/>
+      <tag Name="musictags" Value="Fungal Outcrop,Fin,Roots,Tail,Corpse"/>
       <tag Name="musicsounds" Value="inst3_robo"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
