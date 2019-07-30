@@ -72,7 +72,7 @@
 
     <object Name="PercussionBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst2_high,inst4_pah"/>
+      <tag Name="musicsounds" Value="inst2_high,inst4_pah,int8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/percussion_01.png"/>
       <tag Name="prefixes" Value="drum,bang,slap"/>
       <tag Name="postfixes" Value="drum,tom,ngo"/>
@@ -83,7 +83,7 @@
 
     <object Name="ShakerBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Treads,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst2_bubble"/>
+      <tag Name="musicsounds" Value="inst2_bubble,inst8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
       <tag Name="postfixes" Value="ca,ker,ttle"/>
@@ -94,7 +94,7 @@
 
     <object Name="StringBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst5_fast"/>
+      <tag Name="musicsounds" Value="inst5_fast,inst9_mari,inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="string,pluck,strum"/>
       <tag Name="postfixes" Value="tar,re,no,lin,p"/>
@@ -105,7 +105,7 @@
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Body,Head,Back,Tread,Tail"/>
-      <tag Name="musicsounds" Value="inst3_birb"/>
+      <tag Name="musicsounds" Value="inst3_birb,inst_elec_inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
       <tag Name="postfixes" Value="vox,wave"/>
@@ -116,7 +116,7 @@
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Body,Head,Fungal Outcrop,Fin,Roots,Tail"/>
-      <tag Name="musicsounds" Value="inst3_robo"/>
+      <tag Name="musicsounds" Value="inst3_robo,inst9_mari,inst9_squi,inst7_wat"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
       <tag Name="postfixes" Value="bye,singer"/>
