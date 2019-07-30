@@ -48,7 +48,23 @@
 
     </object>
 
+  <object Name="Beat It" Inherits="Song">
+    <part Name="acegiak_Song"
+    Notes="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7	0.5">
+    </part>
+  </object>
 
+  <object Name="Phantom" Inherits="Song">
+    <part Name="acegiak_Song"
+    Notes="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;">
+    </part>
+  </object>
+
+  <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
+    <part Name="acegiak_Song"
+    Notes="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;">
+    </part>
+  </object>
     <!-- ===== INSTRUMENT BITS ===== -->
 
     <object Name="InstrumentBit" Inherits="DataBucket"></object>
@@ -67,7 +83,7 @@
 
     <object Name="PercussionBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst2_high,inst4_pah"/>
+      <tag Name="musicsounds" Value="inst2_high,inst4_pah,int8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/percussion_01.png"/>
       <tag Name="prefixes" Value="drum,bang,slap"/>
       <tag Name="postfixes" Value="drum,tom,ngo"/>
@@ -78,7 +94,7 @@
 
     <object Name="ShakerBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Treads,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst2_bubble"/>
+      <tag Name="musicsounds" Value="inst2_bubble,inst8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
       <tag Name="postfixes" Value="ca,ker,ttle"/>
@@ -89,7 +105,7 @@
 
     <object Name="StringBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musicsounds" Value="inst5_fast"/>
+      <tag Name="musicsounds" Value="inst5_fast,inst9_mari,inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="string,pluck,strum"/>
       <tag Name="postfixes" Value="tar,re,no,lin,p"/>
@@ -99,8 +115,8 @@
     </object>
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Tread,Artifacts"/>
-      <tag Name="musicsounds" Value="inst3_birb"/>
+      <tag Name="musictags" Value="Body,Head,Back,Tread,Tail"/>
+      <tag Name="musicsounds" Value="inst3_birb,inst_elec_inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
       <tag Name="postfixes" Value="vox,wave"/>
@@ -110,8 +126,8 @@
     </object>
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Fungal Outcrop,Fin,Roots,Tail,Corpse"/>
-      <tag Name="musicsounds" Value="inst3_robo"/>
+      <tag Name="musictags" Value="Body,Head,Fungal Outcrop,Fin,Roots,Tail"/>
+      <tag Name="musicsounds" Value="inst3_robo,inst9_mari,inst9_squi,inst7_wat"/>
       <tag Name="musictiles" Value="items/rattle_01.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
       <tag Name="postfixes" Value="bye,singer"/>
