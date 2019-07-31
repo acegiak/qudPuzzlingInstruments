@@ -83,7 +83,7 @@
     <object Name="WindBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Face,Body,Back,Fin"/>
       <tag Name="musicsounds" Value="inst2_high"/>
-      <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png"/>
+      <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png,items/rattle_03.png,items/wind_02.png,items/wind_03.png,items/horn_02.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="whistl,wind,breez,breath"/>
       <tag Name="postfixes" Value="whistl,wind,breez,breath"/>
       <tag Name="postfixes" Value="boe"/>
@@ -95,7 +95,7 @@
     <object Name="PercussionBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
       <tag Name="musicsounds" Value="inst2_high,inst4_pah,int8_fir,inst6_elec"/>
-      <tag Name="musictiles" Value="items/percussion_01.png"/>
+      <tag Name="musictiles" Value="items/percussion_01.png,items/rattle_02.png,items/horn_03.png,items/percussion_02.png"/>
       <tag Name="prefixes" Value="drum,bang,slap"/>
       <tag Name="postfixes" Value="drum,tom,ngo"/>
       <tag Name="verbs" Value="bang,tap,bash,strike"/>
@@ -106,7 +106,7 @@
     <object Name="ShakerBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Treads,Tail,Arm"/>
       <tag Name="musicsounds" Value="inst2_bubble,inst8_fir,inst6_elec"/>
-      <tag Name="musictiles" Value="items/rattle_01.png"/>
+      <tag Name="musictiles" Value="items/rattle_01.png,items/rattle_02.png,items/rattle_03.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
       <tag Name="postfixes" Value="ca,ker,ttle"/>
       <tag Name="verbs" Value="shake,rattle,roll"/>
@@ -117,7 +117,7 @@
     <object Name="StringBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
       <tag Name="musicsounds" Value="inst5_fast,inst9_mari,inst9_squi"/>
-      <tag Name="musictiles" Value="items/stringed_01.png"/>
+      <tag Name="musictiles" Value="items/stringed_01.png,items/stringed_03.png,items/stringed_02.png,items/percussion_02.png,items/percussion_03.png"/>
       <tag Name="prefixes" Value="string,pluck,strum"/>
       <tag Name="postfixes" Value="tar,re,no,lin,p"/>
       <tag Name="verbs" Value="pluck,strum,strike"/>
@@ -128,7 +128,7 @@
     <object Name="ScienceBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Tread,Tail,Artifacts,Data Disk,Cybernetic Implants,Energy Cell"/>
       <tag Name="musicsounds" Value="inst3_birb,inst_elec_inst9_squi"/>
-      <tag Name="musictiles" Value="items/stringed_01.png"/>
+      <tag Name="musictiles" Value="items/stringed_01.png,items/stringed_02.png,items/wind_03.png,items/horn_02.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
       <tag Name="postfixes" Value="vox,wave"/>
       <tag Name="verbs" Value="activate,adjust,configure"/>
@@ -139,7 +139,7 @@
     <object Name="WeirdBit" Inherits="InstrumentBit">
       <tag Name="musictags" Value="Fungal Outcrop,Fin,Roots,Tail,Corpse,Creature,Cybernetic Implants,Nest,Natural Weapon,Natural Missile Weapon,Natural Armor"/>
       <tag Name="musicsounds" Value="inst3_robo,inst9_mari,inst9_squi,inst7_wat"/>
-      <tag Name="musictiles" Value="items/rattle_01.png"/>
+      <tag Name="musictiles" Value="items/rattle_01.png,items/stringed_03.png,items/wind_02.png,items/wind_03.png,items/percussion_03.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
       <tag Name="postfixes" Value="bye,singer"/>
       <tag Name="verbs" Value="understand,consider,love,hate,stroke,disgorge"/>
@@ -148,7 +148,63 @@
     </object>
 
 
+    <!-- ==== SONG MODS ==== -->
 
+    <object Name="SongMod" Inherits="DataBucket"></object>
+
+    <object Name="SongModClipped" Inherits="SongMod">
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModClipped"/> <!-- Modifies the length of all notes. Multiplier -->
+      <tag Name="musicmodamount" Value="0.75"/>
+    </object>
+
+    <object Name="SongModLaggy" Inherits="SongMod">
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModClipped"/> <!-- Modifies the length of all notes. Multiplier -->
+      <tag Name="musicmodamount" Value="1.5"/>
+    </object>
+
+    <object Name="SongModShiftUp" Inherits="SongMod">
+      <tag Name="musictags" Value="Face,Body,Back,Fin"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModPitchShift"/> <!-- Modifies the pitch of all notes. Multiplier -->
+      <tag Name="musicmodamount" Value="1.25"/>
+    </object>
+
+    <object Name="SongModDoubletime" Inherits="SongMod">
+      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModSpeed"/> <!-- Changes speed of whole song. Multiplier -->
+      <tag Name="musicmodamount" Value="0.5"/>
+    </object>
+
+    <object Name="SongModSlowdown" Inherits="SongMod">
+      <tag Name="musictags" Value="*"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModSpeed"/> <!-- Changes speed of whole song. Multiplier -->
+      <tag Name="musicmodamount" Value="1.5"/>
+    </object>
+
+    <object Name="SongModShiftDown" Inherits="SongMod">
+      <tag Name="musictags" Value="*"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModPitchShift"/> <!-- Modifies the pitch of all notes. Multiplier -->
+      <tag Name="musicmodamount" Value="1.5"/>
+    </object>
+
+    <object Name="SongModBeat" Inherits="SongMod">
+      <tag Name="musictags" Value="*"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModNoteLengthSet"/> <!-- Sets all notes to the same length -->
+      <tag Name="musicmodamount" Value="0.1"/>
+    </object>
+
+    <object Name="SongModHarmony" Inherits="SongMod">
+      <tag Name="musictags" Value="*"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModHarmony"/> <!-- Adds 1 harmony note for each note in song -->
+      <tag Name="musicmodamount" Value="1.5"/>
+    </object>
+
+    <object Name="SongModChord" Inherits="SongMod">
+      <tag Name="musictags" Value="*"/>
+      <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModChord"/> <!-- Adds 2 harmony notes for each note in song -->
+      <tag Name="musicmodamount" Value="1.25"/>
+    </object>
 
     <!-- ===== INSTRUMENTS ===== -->
 

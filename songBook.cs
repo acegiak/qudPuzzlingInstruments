@@ -161,6 +161,28 @@ namespace XRL.World.Parts
         }
 
         public List<List<float>> noteTransform(List<List<float>> noteData, List<string> tags){
+
+            foreach (GameObjectBlueprint blueprint in GameObjectFactory.Factory.BlueprintList)
+			{
+				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("SongMod"))
+				{
+					//IPart.AddPlayerMessage(blueprint.Name);
+					GameObject sample = GameObjectFactory.Factory.CreateSampleObject(blueprint.Name);
+                    if(sample.HasTag("musictags")){
+						List<string> musictags = sample.GetTag("musictags").Split(',').ToList();
+						if(sample.GetTag("musictags") == "*" || tags.Where(b=>musictags.Contains(b)).Any()){
+                            if(sample.HasTag("musicmodifier")){
+                                acegiak_SongMod mod = Activator.CreateInstance(Type.GetType(sample.GetTag("musicmodifier"))) as acegiak_SongMod;
+                                noteData = mod.AlterNotes(noteData);
+                                if(sample.HasTag("musicmodamount")){
+                                    mod.AlterAmount = acegiak_AudioSequencer.ParseFloat(sample.GetTag("musicmodamount"));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             return noteData;
         }
 
@@ -227,10 +249,12 @@ namespace XRL.World.Parts
 
 			if(E.ID == "ShowConversationChoices" ){
 				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null ){
+                    IPart.AddPlayerMessage("My tags are:"+String.Join(", ",FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
+
 					if(this.Songs.Count > 0 && !this.learnedFrom ){
-					
-						
+                        
 						if(E.GetParameter<ConversationNode>("CurrentNode") != null && E.GetParameter<ConversationNode>("CurrentNode") is WaterRitualNode){
+
 							WaterRitualNode wrnode = E.GetParameter<ConversationNode>("CurrentNode") as WaterRitualNode;
 							List<ConversationChoice> Choices = E.GetParameter<List<ConversationChoice>>("Choices") as List<ConversationChoice>;
 
@@ -290,7 +314,7 @@ namespace XRL.World.Parts
             if(sample == null){
                 return tags;
             }
-            for(int i = 0; i<2;i++){
+            for(int i = 0; i<1;i++){
                 if(sample.GetPart<Inventory>() != null){
                     GameObject samplePossession = sample.GetPart<Inventory>().GetObjects().GetRandomElement();
                     if(samplePossession != null && samplePossession.pPhysics != null){
@@ -299,7 +323,7 @@ namespace XRL.World.Parts
                     }
                 }
             }
-            for(int i = 0; i<2;i++){
+            for(int i = 0; i<1;i++){
                 if(sample.GetPart<Body>() != null){
                     BodyPart samplePart = sample.GetPart<Body>().GetParts().Where(p=>!p.Extrinsic && !p.Abstract).GetRandomElement();
                     if(samplePart != null){

@@ -26,4 +26,13 @@ public class acegiak_Song: IPart{
     }
 
 }
+
+public class acegiak_SongMod{
+
+    public float AlterAmount = 0.5f;
+    public virtual List<List<float>> AlterNotes(List<List<float>> notes){
+        return notes;
+    }
+}
+
 }
