@@ -5,20 +5,52 @@
   Armor, Shields, Grenades, Creature, Nest, Natural Weapon, Natural Missile Weapon,
   Food, Tonics, Applicators, Water Container, Books, Light Source, Ammo, Natural Armor
   Tools, Trade Goods, Clothes, Quest Items, Meds, Data Disk, Scrap, Trinket, Energy Cell,
-  Terrain, Liquids, Cybernetic Implants, Miscellaneous, Plant, Fungus -->
+  Terrain, Liquids, Cybernetic Implants, Miscellaneous, Plant, Fungus
+  
+  
+  
+  Dragon?
+  Body,Head, Face,Back,Shields,Melee Weapon,Grenades,Arm,Natural Weapon
+
+  Igor?
+  Corpse,Artifacts,Energy Cell,Cybernetic Implants,Data Disk,Tools,Fungal Outcrop,Tread,Fungus,Hand,Hands
+
+  Shadow?
+  Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon
+
+  Hands?
+  Hand,Hands,Trinket,Missile Weapon,Projectile,Ammo,Tools,Scrap,Grenades,Melee Weapon
+
+  Healer?
+  Head,Roots,Books,Meds,Tonics,Applicators,Food,Terrain,Liquids,Creature,Plant,Data Disk,Cybernetic Implants
+
+  Wanderer?
+  Feet,Foot,Missile Weapon,Projectile,Liquids,Water Container,Ammo,Miscellaneous,Tread,Light Source,Meds,Quest Items
+
+  Hardholder?
+  Shields,Trade Goods,Armor,Body,Water Container,Food,Feet,Back,Foot,Arm,Terrain,Liquids, Natural Armor,Nest,Fungal Outcrop,Corpse,Clothes
+
+  Peacock?
+  Clothes,Trade Goods,Energy Cell,Fin,Roots,Tail,Face,Trinket,Quest Items,Artifacts,Armor
+
+  
+   -->
 
 
   <!-- ===== SONGS ===== -->
 
   <object Name="Song" Inherits="DataBucket"></object>
   
-    <!-- <object Name="A Celebration Song" Inherits="Song">
+    <object Name="A Celebration Song" Inherits="Song">
       <part Name="acegiak_Song"
       Notes="49.23,0.01,0.24;349.23,0.26,0.25;329.63,0.5,0.5;261.63,1,0.5;293.66,1.5,0.5;261.63,2,1;">
       </part>
+      <tag Name="musictags" Value="Grenades"/><!-- Lol Grenades -->
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
+      <tag Name="musicthemes" Value="surprise,iginition,explosion,fun"/>
     </object>
 
-    <object Name="A Dramatic Song" Inherits="Song">
+    <!-- <object Name="A Dramatic Song" Inherits="Song">
       <part Name="acegiak_Song"
       Notes="311.13,0.01,0.5;261.63,0.5,0.5;369.99,1,1.5">
       </part>
@@ -27,61 +59,59 @@
     <object Name="A New Challenge" Inherits="Song">
         <tag Name="musicnotes"
         Value="440,0.01,0.2;479.996,0.5,0.2;550,1,1;479.996,2,0.2;440,2.2,0.2;479.996,2.4,0.2;440,2.6,0.5"/>
-        
-        <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
+        <tag Name="musictags" Value="Body,Head,Face,Back,Shields,Melee Weapon,Grenades,Arm,Natural Weapon"/><!-- Dragon -->
+        <tag Name="musiceffect" Value="acegiak_SongEffectThirstLess"/> <!--restores thirst -->
+        <tag Name="musicthemes" Value="adventure"/>
 
     </object>
 
     <object Name="I Love My Pet Rock" Inherits="Song">
         <tag Name="musicnotes"
         Value="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3"/>
-        
-        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
-
+        <tag Name="musictags" Value="Feet,Foot,Missile Weapon,Projectile,Liquids,Water Container,Ammo,Miscellaneous,Tread,Light Source,Meds,Quest Items"/> <!-- Wanderer -->
+        <tag Name="musiceffect" Value="acegiak_SongEffectThirstLess"/> <!--restores thirst -->
+        <tag Name="musicthemes" Value="travel,wander"/>
     </object>
 
     <object Name="Go To Sleep" Inherits="Song">
         <tag Name="musicnotes"
-        Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/>
-        
-        <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectSleep"/>
+        Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/> 
+        <tag Name="musictags" Value="Head,Roots,Books,Meds,Tonics,Applicators,Food,Terrain,Liquids,Creature,Plant,Data Disk,Cybernetic Implants"/><!-- Healer -->
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectSleep"/> <!-- puts nearby people to sleep-->
         <tag Name="musicthemes" Value="sleep,rest,calm,nod"/>
     </object>
 
   <object Name="Beat It" Inherits="Song">
-      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-
-    <tag Name="musicnotes"
+      <tag Name="musictags" Value="Hand,Hands,Trinket,Missile Weapon,Projectile,Ammo,Tools,Scrap,Grenades,Melee Weapon"/> <!-- hands -->
+      <tag Name="musicnotes"
     Value="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7,0.5"/>
-    
+      <tag Name="musicthemes" Value="hunt,war,murder"/>
   </object>
 
   <object Name="Phantom" Inherits="Song">
-      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
-
-    <tag Name="musicnotes"
+      <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/><!-- Shadow -->
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/> <!--sets nearby people on fire -->
+      <tag Name="musicnotes"
     Value="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;"/>
-    
+      <tag Name="musicthemes" Value="shadow,mystery"/>
   </object>
 
   <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
-      <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
-
-    <tag Name="musicnotes"
+      <tag Name="musictags" Value="Clothes,Trade Goods,Energy Cell,Fin,Roots,Tail,Face,Trinket,Quest Items,Artifacts,Armor"/> <!-- Peacock -->
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/> <!--sets nearby people on fire -->
+      <tag Name="musicnotes"
     Value="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;"/>
-    
+      <tag Name="musicthemes" Value="display,friendship"/>
   </object>
+
+
+
     <!-- ===== INSTRUMENT BITS ===== -->
 
     <object Name="InstrumentBit" Inherits="DataBucket"></object>
 
     <object Name="WindBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Face,Body,Back,Fin"/>
+      <tag Name="musictags" Value="Body,Head,Face,Back,Shields,Melee Weapon,Grenades,Arm,Natural Weapon,Head,Roots,Books,Meds,Tonics,Applicators,Food,Terrain,Liquids,Creature,Plant,Data Disk,Cybernetic Implants"/>
       <tag Name="musicsounds" Value="inst2_high"/>
       <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png,items/rattle_03.png,items/wind_02.png,items/wind_03.png,items/horn_02.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="whistl,wind,breez,breath"/>
@@ -93,7 +123,7 @@
     </object>
 
     <object Name="PercussionBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musictags" Value="Feet,Foot,Missile Weapon,Projectile,Liquids,Water,Shields,Trade Goods,Armor,Body,Water Container,Food,Feet,Back,Foot,Arm,Terrain,Liquids, Natural Armor,Nest,Fungal Outcrop,Corpse,Clothes"/>
       <tag Name="musicsounds" Value="inst2_high,inst4_pah,int8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/percussion_01.png,items/rattle_02.png,items/horn_03.png,items/percussion_02.png"/>
       <tag Name="prefixes" Value="drum,bang,slap"/>
@@ -104,7 +134,7 @@
     </object>
 
     <object Name="ShakerBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Hand,Hands,Treads,Tail,Arm"/>
+      <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon,Shields,Trade Goods,Armor,Body,Water Container,Food,Feet,Back,Foot,Arm,Terrain,Liquids, Natural Armor,Nest,Fungal Outcrop,Corpse,Clothes"/>
       <tag Name="musicsounds" Value="inst2_bubble,inst8_fir,inst6_elec"/>
       <tag Name="musictiles" Value="items/rattle_01.png,items/rattle_02.png,items/rattle_03.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="shak,jiggl,rattl,tumbl"/>
@@ -115,7 +145,7 @@
     </object>
 
     <object Name="StringBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musictags" Value="Hand,Hands,Trinket,Missile Weapon,Projectile,Ammo,Tools,Scrap,Grenades,Melee Weapon,Feet,Foot,Missile Weapon,Projectile,Liquids,Water Container,Ammo,Miscellaneous,Tread,Light Source,Meds,Quest Items"/>
       <tag Name="musicsounds" Value="inst5_fast,inst9_mari,inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png,items/stringed_03.png,items/stringed_02.png,items/percussion_02.png,items/percussion_03.png"/>
       <tag Name="prefixes" Value="string,pluck,strum"/>
@@ -126,7 +156,7 @@
     </object>
 
     <object Name="ScienceBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Tread,Tail,Artifacts,Data Disk,Cybernetic Implants,Energy Cell"/>
+      <tag Name="musictags" Value="Corpse,Artifacts,Energy Cell,Cybernetic Implants,Data Disk,Tools,Fungal Outcrop,Tread,Fungus,Hand,Hands,Natural Armor,Natural Weapon,Natural Missile Weapon,Clothes,Trade Goods,Energy Cell,Fin,Roots,Tail,Face,Trinket,Quest Items,Artifacts,Armor"/>
       <tag Name="musicsounds" Value="inst3_birb,inst_elec_inst9_squi"/>
       <tag Name="musictiles" Value="items/stringed_01.png,items/stringed_02.png,items/wind_03.png,items/horn_02.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="vibr,electr,sin,autom,vox,cyber,aud,mech"/>
@@ -137,7 +167,7 @@
     </object>
 
     <object Name="WeirdBit" Inherits="InstrumentBit">
-      <tag Name="musictags" Value="Fungal Outcrop,Fin,Roots,Tail,Corpse,Creature,Cybernetic Implants,Nest,Natural Weapon,Natural Missile Weapon,Natural Armor"/>
+      <tag Name="musictags" Value="Corpse,Artifacts,Energy Cell,Cybernetic Implants,Data Disk,Tools,Fungal Outcrop,Tread,Fungus,Hand,Hands,Natural Armor,Natural Weapon,Natural Missile Weapon,Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/>
       <tag Name="musicsounds" Value="inst3_robo,inst9_mari,inst9_squi,inst7_wat"/>
       <tag Name="musictiles" Value="items/rattle_01.png,items/stringed_03.png,items/wind_02.png,items/wind_03.png,items/percussion_03.png"/>
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
@@ -153,55 +183,55 @@
     <object Name="SongMod" Inherits="DataBucket"></object>
 
     <object Name="SongModClipped" Inherits="SongMod">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModClipped"/> <!-- Modifies the length of all notes. Multiplier -->
       <tag Name="musicmodamount" Value="0.75"/>
     </object>
 
     <object Name="SongModLaggy" Inherits="SongMod">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musictags" Value="Body,Head,Face,Back,Shields,Melee Weapon,Grenades,Arm,Natural Weapon"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModClipped"/> <!-- Modifies the length of all notes. Multiplier -->
       <tag Name="musicmodamount" Value="1.5"/>
     </object>
 
     <object Name="SongModShiftUp" Inherits="SongMod">
-      <tag Name="musictags" Value="Face,Body,Back,Fin"/>
+      <tag Name="musictags" Value="Body,Head,Face,Back,Shields,Melee Weapon,Grenades,Arm,Natural Weapon"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModPitchShift"/> <!-- Modifies the pitch of all notes. Multiplier -->
       <tag Name="musicmodamount" Value="1.25"/>
     </object>
 
     <object Name="SongModDoubletime" Inherits="SongMod">
-      <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
+      <tag Name="musictags" Value="Shields,Trade Goods,Armor,Body,Water Container,Food,Feet,Back,Foot,Arm,Terrain,Liquids, Natural Armor,Nest,Fungal Outcrop,Corpse,Clothes"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModSpeed"/> <!-- Changes speed of whole song. Multiplier -->
       <tag Name="musicmodamount" Value="0.5"/>
     </object>
 
     <object Name="SongModSlowdown" Inherits="SongMod">
-      <tag Name="musictags" Value="*"/>
+      <tag Name="musictags" Value="Feet,Foot,Missile Weapon,Projectile,Liquids,Water Container,Ammo,Miscellaneous,Tread,Light Source,Meds,Quest Items"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModSpeed"/> <!-- Changes speed of whole song. Multiplier -->
       <tag Name="musicmodamount" Value="1.5"/>
     </object>
 
     <object Name="SongModShiftDown" Inherits="SongMod">
-      <tag Name="musictags" Value="*"/>
+      <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModPitchShift"/> <!-- Modifies the pitch of all notes. Multiplier -->
       <tag Name="musicmodamount" Value="1.5"/>
     </object>
 
     <object Name="SongModBeat" Inherits="SongMod">
-      <tag Name="musictags" Value="*"/>
+      <tag Name="musictags" Value="Hand,Hands,Trinket,Missile Weapon,Projectile,Ammo,Tools,Scrap,Grenades,Melee Weapon"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModNoteLengthSet"/> <!-- Sets all notes to the same length -->
       <tag Name="musicmodamount" Value="0.1"/>
     </object>
 
     <object Name="SongModHarmony" Inherits="SongMod">
-      <tag Name="musictags" Value="*"/>
+      <tag Name="musictags" Value="Head,Roots,Books,Meds,Tonics,Applicators,Food,Terrain,Liquids,Creature,Plant,Data Disk,Cybernetic Implants"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModHarmony"/> <!-- Adds 1 harmony note for each note in song -->
       <tag Name="musicmodamount" Value="1.5"/>
     </object>
 
     <object Name="SongModChord" Inherits="SongMod">
-      <tag Name="musictags" Value="*"/>
+      <tag Name="musictags" Value="Clothes,Trade Goods,Energy Cell,Fin,Roots,Tail,Face,Trinket,Quest Items,Artifacts,Armor"/>
       <tag Name="musicmodifier" Value="XRL.World.Parts.acegiak_SongModChord"/> <!-- Adds 2 harmony notes for each note in song -->
       <tag Name="musicmodamount" Value="1.25"/>
     </object>

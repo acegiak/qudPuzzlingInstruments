@@ -162,6 +162,7 @@ namespace XRL.World.Parts
 
         public List<List<float>> noteTransform(List<List<float>> noteData, List<string> tags){
 
+            List<acegiak_SongMod> mods = new List<acegiak_SongMod>();
             foreach (GameObjectBlueprint blueprint in GameObjectFactory.Factory.BlueprintList)
 			{
 				if (!blueprint.IsBaseBlueprint() && blueprint.DescendsFrom("SongMod"))
@@ -173,15 +174,15 @@ namespace XRL.World.Parts
 						if(sample.GetTag("musictags") == "*" || tags.Where(b=>musictags.Contains(b)).Any()){
                             if(sample.HasTag("musicmodifier")){
                                 acegiak_SongMod mod = Activator.CreateInstance(Type.GetType(sample.GetTag("musicmodifier"))) as acegiak_SongMod;
-                                noteData = mod.AlterNotes(noteData);
-                                if(sample.HasTag("musicmodamount")){
-                                    mod.AlterAmount = acegiak_AudioSequencer.ParseFloat(sample.GetTag("musicmodamount"));
-                                }
+                                mods.Add(mod);
                             }
                         }
                     }
                 }
             }
+            for(int i = Stat.Rnd2.Next(3);i>0;i--){
+                noteData = mods.GetRandomElement().AlterNotes(noteData);
+            }            
 
             return noteData;
         }
