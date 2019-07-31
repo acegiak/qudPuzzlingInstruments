@@ -83,6 +83,9 @@ namespace XRL.World.Parts
                         Song.Notes = item.GetTag("musicnotes");
                         Song.Name = item.GetBlueprint().Name;
                         Song.Effect = item.GetTag("musiceffect");
+                        if(Song.Effect != null){
+                            Song.Effect = Song.Effect.Split(',').ToList().GetRandomElement();
+                        }
                         if(item.HasTag("musicthemes")){
                             Song.Themes = item.GetTag("musicthemes").Split(',').ToList();
                         }
@@ -100,30 +103,32 @@ namespace XRL.World.Parts
             if(song.Themes != null){
                 List<string> songwords = new List<string>{"song","tune","lullabye","sound","call","tone"};
                 string FactionFancy = Factions.FactionList[faction].DisplayName;
+                string theme = song.Themes.GetRandomElement();
+                string themeShort = theme.Replace("the ","").Replace("ing","");
                 switch(Stat.Rnd2.Next(8)){
                     case 0:
-                        song.Name = Grammar.Adjectify(FactionFancy) + song.Themes.GetRandomElement()+" "+songwords.GetRandomElement();
+                        song.Name = Grammar.Adjectify(FactionFancy) +" "+ theme.Replace("the ","")+" "+songwords.GetRandomElement();
                         break;
                     case 1:
-                        song.Name = song.Themes.GetRandomElement()+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        song.Name = theme.Replace("the ","")+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
                         break;
                     case 2:
-                        song.Name = Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
                         break;
                     case 3:
-                        song.Name = Grammar.Adjectify(FactionFancy)+" "+songwords.GetRandomElement()+" of "+song.Themes.GetRandomElement();
+                        song.Name = Grammar.Adjectify(FactionFancy)+" "+songwords.GetRandomElement()+" of "+theme;
                         break;
                     case 4:
-                        song.Name = Grammar.MakePossessive(FactionFancy)+" "+songwords.GetRandomElement()+" of "+song.Themes.GetRandomElement();
+                        song.Name = Grammar.MakePossessive(FactionFancy)+" "+songwords.GetRandomElement()+" of "+theme;
                         break;
                     case 5:
-                        song.Name = Grammar.MakePossessive(FactionFancy) + song.Themes.GetRandomElement()+" "+songwords.GetRandomElement();
+                        song.Name = Grammar.MakePossessive(FactionFancy) +" " + song.Themes.GetRandomElement()+" "+songwords.GetRandomElement();
                         break;
                     case 6:
-                        song.Name = Grammar.MakePossessive(FactionFancy) + Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement();
+                        song.Name = Grammar.MakePossessive(FactionFancy)+" " + Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement();
                         break;
                     case 7:
-                        song.Name = Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
                         break;
                 }
                 song.Name = Grammar.MakeTitleCase(song.Name);
@@ -248,9 +253,9 @@ namespace XRL.World.Parts
 
 
 
-			if(E.ID == "ShowConversationChoices" ){
+			if(E.ID == "ShowConversationChoices" && !ParentObject.IsPlayer()){
 				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null ){
-                    IPart.AddPlayerMessage("My tags are:"+String.Join(", ",FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
+                    //IPart.AddPlayerMessage("My tags are:"+String.Join(", ",FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
 
 					if(this.Songs.Count > 0 && !this.learnedFrom ){
                         
