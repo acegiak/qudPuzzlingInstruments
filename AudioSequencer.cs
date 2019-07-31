@@ -161,10 +161,11 @@ public class acegiak_AudioSequencer : MonoBehaviour
         }
     }
 
-    public float ParseFloat(string f){
+    public static float ParseFloat(string f){
+        Debug.Log("PARSEFLOAT:"+f);
         return (float)double.Parse(f,System.Globalization.NumberStyles.AllowDecimalPoint);
     }
-    public float HzToMulti(float targetHz){
+    public static float HzToMulti(float targetHz){
         return targetHz/baseHz;
     }
 }

@@ -47,15 +47,15 @@
         Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/>
         
         <tag Name="musictags" Value="Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
-        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFire"/>
-
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectSleep"/>
+        <tag Name="musicthemes" Value="sleep,rest,calm,nod"/>
     </object>
 
   <object Name="Beat It" Inherits="Song">
       <tag Name="musictags" Value="Body,Hand,Hands,Feet,Foot,Fin,Tail,Arm"/>
 
     <tag Name="musicnotes"
-    Value="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7	0.5"/>
+    Value="330,0.01,1;330,0.5,0.5;330,1,0.5;412.5,1.5,0.5;412.5,2,1;412.5,3,0.5;412.5,3.5,0.5;439.989,4,0.5;439.989,5,0.5;439.989,5.5,0.5;412.5,6,0.5;412.5,6.5,0.5;412.5,7,0.5"/>
     
   </object>
 

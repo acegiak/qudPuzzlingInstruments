@@ -15,7 +15,11 @@ public class acegiak_Song: IPart{
     
     public string Notes;
 
+    public string Faction;
+
     public string Effect;
+
+    public List<string> Themes;
 
     public string ToString(){
         return Name+": "+Notes;

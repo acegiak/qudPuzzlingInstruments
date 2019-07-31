@@ -13,6 +13,7 @@ using Qud.API;
 using XRL.World;
 using System.Linq;
 using HistoryKit;
+using XRL.Language;
 
 
 namespace XRL.World.Parts
@@ -82,7 +83,9 @@ namespace XRL.World.Parts
                         Song.Notes = item.GetTag("musicnotes");
                         Song.Name = item.GetBlueprint().Name;
                         Song.Effect = item.GetTag("musiceffect");
-                        
+                        if(item.HasTag("musicthemes")){
+                            Song.Themes = item.GetTag("musicthemes").Split(',').ToList();
+                        }
                         ElligbleSongs.Add(Song);
                     }
                 }
@@ -94,8 +97,73 @@ namespace XRL.World.Parts
         }
 
         public acegiak_Song MakeItCultural(acegiak_Song song, string faction){
+            if(song.Themes != null){
+                List<string> songwords = new List<string>{"song","tune","lullabye","sound","call","tone"};
+                string FactionFancy = Factions.FactionList[faction].DisplayName;
+                switch(Stat.Rnd2.Next(8)){
+                    case 0:
+                        song.Name = Grammar.Adjectify(FactionFancy) + song.Themes.GetRandomElement()+" "+songwords.GetRandomElement();
+                        break;
+                    case 1:
+                        song.Name = song.Themes.GetRandomElement()+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        break;
+                    case 2:
+                        song.Name = Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        break;
+                    case 3:
+                        song.Name = Grammar.Adjectify(FactionFancy)+" "+songwords.GetRandomElement()+" of "+song.Themes.GetRandomElement();
+                        break;
+                    case 4:
+                        song.Name = Grammar.MakePossessive(FactionFancy)+" "+songwords.GetRandomElement()+" of "+song.Themes.GetRandomElement();
+                        break;
+                    case 5:
+                        song.Name = Grammar.MakePossessive(FactionFancy) + song.Themes.GetRandomElement()+" "+songwords.GetRandomElement();
+                        break;
+                    case 6:
+                        song.Name = Grammar.MakePossessive(FactionFancy) + Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement();
+                        break;
+                    case 7:
+                        song.Name = Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        break;
+                }
+                song.Name = Grammar.MakeTitleCase(song.Name);
+            }
+
+            List<List<float>> noteData = new List<List<float>>();
+            foreach(string note in song.Notes.Split(';')){
+                List<float> notefloats = new List<float>();
+                foreach(string notebit in note.Split(',')){
+                    if(notebit.Length > 0){
+                        float f = acegiak_AudioSequencer.ParseFloat(notebit);
+                        notefloats.Add(f);
+                    }
+                }
+                noteData.Add(notefloats);
+            }
+            
+
+            noteData = noteTransform(noteData,FactionTags(faction));
+
+            List<string> notebits =new List<string>();
+            foreach(List<float> floatlist in noteData){
+                List<string> fromfloats = new List<string>();
+                foreach(float f in floatlist){
+                    fromfloats.Add(f.ToString());
+                }
+                string joinedfloats = String.Join(",",fromfloats.ToArray());
+                notebits.Add(joinedfloats);
+            }
+            song.Notes = String.Join(";",notebits.ToArray());
+
+            
+
             return song;
         }
+
+        public List<List<float>> noteTransform(List<List<float>> noteData, List<string> tags){
+            return noteData;
+        }
+
 
         public List<GameObject> GetBaseSongs(){
             List<GameObject> BaseSongs = new List<GameObject>();
