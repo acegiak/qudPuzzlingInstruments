@@ -8,7 +8,7 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectHunter : Effect
+	public class acegiak_SongEffectHunter : acegiak_SongEffect
 	{
 		public acegiak_SongEffectHunter()
 		{
@@ -43,15 +43,26 @@ namespace XRL.World.Parts.Effects
 					{
 						if (Object.DistanceTo(item) <= radius && item.pBrain != null)
 						{
-                            if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied)
-							
+                            if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied){
+
+								List<Effect> remove = new List<Effect>();
+								foreach (Effect effect in item.Effects)
+								{
+									if(effect is acegiak_SongEffect){
+										remove.Add(effect);
+									}
+								}
+								foreach(Effect effect in remove){
+									item.RemoveEffect(effect);
+								}
+
                                 item.ApplyEffect(new acegiak_HunterSong(10* Stat.Random(1, 10)));
                                 if(item.IsPlayer()){
 					                Popup.Show("You are inspired to the hunt.");
                                 }else{
                                     IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to the hunt");
                                 }
-                            
+							}
 						}
 					}
 				}

@@ -8,7 +8,7 @@ using Qud.API;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongSecondaryEffectAdventure : Effect
+	public class acegiak_SongSecondaryEffectAdventure : acegiak_SongEffect
 	{
 		public bool DisableUnlost;
 

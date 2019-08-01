@@ -8,7 +8,7 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectAdventure : Effect
+	public class acegiak_SongEffectAdventure : acegiak_SongEffect
 	{
 		public acegiak_SongEffectAdventure()
 		{
@@ -44,7 +44,18 @@ namespace XRL.World.Parts.Effects
 						if (Object.DistanceTo(item) <= radius && item.pBrain != null)
 						{
                             if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied){
-							
+
+								List<Effect> remove = new List<Effect>();
+								foreach (Effect effect in item.Effects)
+								{
+									if(effect is acegiak_SongEffect){
+										remove.Add(effect);
+									}
+								}
+								foreach(Effect effect in remove){
+									item.RemoveEffect(effect);
+								}
+
                                 item.ApplyEffect(new acegiak_SongSecondaryEffectAdventure(600* Stat.Random(1, 6)));
                                 if(item.IsPlayer()){
 					                Popup.Show("You are lured to the horizon!");

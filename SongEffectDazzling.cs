@@ -9,7 +9,7 @@ using XRL.Language;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectDazzling : Effect
+	public class acegiak_SongEffectDazzling : acegiak_SongEffect
 	{
 		public acegiak_SongEffectDazzling()
 		{

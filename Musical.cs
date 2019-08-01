@@ -26,6 +26,8 @@ namespace XRL.World.Parts
 
 		public string instrumentName;
 
+		public string backupDescription;
+
 		public string Faction = null;
 
 		public bool Generate = false;
@@ -48,6 +50,8 @@ namespace XRL.World.Parts
 			Object.RegisterPartEvent(this,"IdleQuery");
 			Object.RegisterPartEvent(this,"CanSmartUse");
 			Object.RegisterPartEvent(this,"CommandSmartUse");
+			Object.RegisterPartEvent(this,"ExamineSuccess");
+			
 			
 			base.Register(Object);
 		}
@@ -129,6 +133,11 @@ namespace XRL.World.Parts
 					}
 				//}
 			}
+			if(E.ID == "ExamineSuccess"){
+				// ParentObject.GetPart<Description>().Short = this.backupDescription;
+				// ParentObject.MakeUnderstood();
+				ParentObject.GetPart<Examiner>().AlternateDescription = this.backupDescription;
+			}
 			
 
 			
@@ -166,7 +175,6 @@ namespace XRL.World.Parts
 			}
 			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
 			if(song.Effect != null){
-				    
                     //IPart.AddPlayerMessage("Effect:"+song.Effect);
                     Effect effect = Activator.CreateInstance(Type.GetType(song.Effect)) as Effect;
 					//effect.Duration = Stat.Rnd2.Next(100);
@@ -265,7 +273,7 @@ namespace XRL.World.Parts
             List<char> HotkeyList = new List<char>();
             char ch = 'a';
 			if(part2 == null || part2.Songs.Count <= 0){
-				Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("don't")+" know any songs");
+				Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("doesn't")+" know any songs");
 				return null;
 			}
 			foreach(acegiak_Song song in part2.Songs){
@@ -276,7 +284,7 @@ namespace XRL.World.Parts
             }
             if (ObjectChoices.Count == 0)
             {
-                Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("don't")+" know any songs");
+                Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("doesn't")+" know any songs");
                 return null;
             }
             int num12 = Popup.ShowOptionList(string.Empty, ChoiceList.ToArray(), HotkeyList.ToArray(), 0, "Select a song to play.", 60, bRespectOptionNewlines: false, bAllowEscape: true);
@@ -390,6 +398,7 @@ namespace XRL.World.Parts
 
 
 			ParentObject.pRender.DisplayName = newname;
+			this.backupDescription = ParentObject.GetPart<Description>().Short;
 			this.instrumentName = newname;
 		}
 

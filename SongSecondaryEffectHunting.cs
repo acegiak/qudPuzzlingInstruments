@@ -7,7 +7,7 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_HunterSong : Effect
+	public class acegiak_HunterSong : acegiak_SongEffect
 	{
 		public bool DisableUnlost;
 

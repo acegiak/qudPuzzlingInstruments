@@ -7,7 +7,7 @@ using XRL.World.Parts;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectFire : Effect
+	public class acegiak_SongEffectFire : acegiak_SongEffect
 	{
 		public acegiak_SongEffectFire()
 		{

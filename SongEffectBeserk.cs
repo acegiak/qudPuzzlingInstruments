@@ -8,7 +8,7 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectBeserk : Effect
+	public class acegiak_SongEffectBeserk : acegiak_SongEffect
 	{
 		public acegiak_SongEffectBeserk()
 		{

@@ -174,7 +174,7 @@
       <tag Name="prefixes" Value="organ,flesh,mind,psych,met,lull,siren"/>
       <tag Name="postfixes" Value="bye,singer"/>
       <tag Name="verbs" Value="understand,consider,love,hate,stroke,disgorge"/>
-      <tag Name="verbs" Value="sinew,tendon,organ,muscle,mind"/>
+      <tag Name="parts" Value="sinew,tendon,organ,muscle,mind"/>
       <tag Name="descriptors" Value="upsetting,living,sentient,otherwordly"/>
     </object>
 
@@ -244,28 +244,20 @@
         <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
         <part Name="Description" Short="A strange musical contraption"></part>
         <part Name="Metal"></part>
-        <part Name="Examiner" AlternateDisplayName="contraption" Complexity="1" Difficulty="0"></part>
-
+        <part Name="Examiner" AlternateDisplayName="contraption" Complexity="0" Difficulty="0"></part>
+        <part Name="Physics" Category="Trinket" Weight="8"/>
         <tag Name="BaseObject" Value="*noinherit" />
     </object>
 
 
-    <object Name="Puzzling Instrument" Inherits="BaseInstrument">
-      <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="Tiles/sw_box.bmp" ColorString="&amp;c" DetailColor="C"></part>
-      <part Name="acegiak_Musical" SoundName="oboe"></part>
-    </object>
-    <object Name="New Instrument" Inherits="BaseInstrument">
-      <part Name="Render" DisplayName="&amp;cnew instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
+    <object Name="Musical Instrument" Inherits="BaseInstrument">
+      <part Name="Render" DisplayName="&amp;cmusical instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
       <part Name="Description" Short="A strange musical contraption"></part>
       <part Name="Metal"></part>
+      <part Name="TinkerItem" Bits="003" CanDisassemble="true" CanBuild="true" CanRepair="true" />
       <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
     </object>
-    <object Name="Instrument2" Inherits="BaseInstrument">
-    <part Name="Render" DisplayName="&amp;cinstrument2" Tile="items/horn_01.png" ColorString="&amp;c" DetailColor="C"></part>
-    <part Name="Description" Short="A strange musical contraption"></part>
-    <part Name="Metal"></part>
-    <part Name="acegiak_Musical" SoundName="inst2_high"></part>
-    </object>
+
 
 
 
@@ -273,7 +265,7 @@
     <object Name="Creature" Load="Merge">
       <part Name="acegiak_SongBook"/>
     </object>
-    <object Name="BaseWatervineFarmer" Load="Merge">
+    <!-- <object Name="BaseWatervineFarmer" Load="Merge">
         <inventoryobject Blueprint="New Instrument" Number="1" />
-    </object>
+    </object> -->
   </objects>
