@@ -254,7 +254,7 @@ namespace XRL.World.Parts
 
 
 			if(E.ID == "ShowConversationChoices" && !ParentObject.IsPlayer()){
-				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null ){
+				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null && XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music")){
                     //IPart.AddPlayerMessage("My tags are:"+String.Join(", ",FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
 
 					if(this.Songs.Count > 0 && !this.learnedFrom ){

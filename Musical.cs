@@ -84,7 +84,8 @@ namespace XRL.World.Parts
 
 		public override bool FireEvent(Event E)
 		{
-			if (E.ID == "GetInventoryActions")
+			Make();
+			if (E.ID == "GetInventoryActions" && XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music"))
 			{
 				E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("PlayTune", 'p', false, "&Wp&ylay a tune", "InvCommandPlayTune", 10);
 				E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("ComposeTune", 'C', false, "&WC&yompose a tune", "InvCommandComposeTune", 10);
@@ -131,7 +132,6 @@ namespace XRL.World.Parts
 			
 
 			
-			Make();
 			 
 			return base.FireEvent(E);
 		}

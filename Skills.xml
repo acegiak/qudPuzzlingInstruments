@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<skills>
+
+  <skill Name="Customs and Folklore" Load="Merge">
+    <power Name="Music" Cost="50" Attribute="Intelligence" Minimum="17" Class="acegiak_Customs_Music" Snippet="playing music" Description="You gain an understanding of essential music theory and how to manipulate musical instruments."></power>
+  </skill>
+</skills>

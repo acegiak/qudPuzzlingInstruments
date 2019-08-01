@@ -244,6 +244,8 @@
         <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
         <part Name="Description" Short="A strange musical contraption"></part>
         <part Name="Metal"></part>
+        <part Name="Examiner" AlternateDisplayName="contraption" Complexity="1" Difficulty="0"></part>
+
         <tag Name="BaseObject" Value="*noinherit" />
     </object>
 
