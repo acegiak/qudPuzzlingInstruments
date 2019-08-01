@@ -61,7 +61,7 @@ namespace XRL.World.Parts
                 // Songs = GetBaseSongs().Select(b=>new acegiak);
                 return;
             }
-            for(int i = Stat.Rnd2.Next(3);i>0;i--){
+            for(int i = Stat.Rnd2.Next(5);i>0;i--){
                 acegiak_Song song = SongOfMyPeople();
                 if(song != null){
                     Songs.Add(song);
