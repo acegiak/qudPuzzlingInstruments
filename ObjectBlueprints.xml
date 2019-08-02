@@ -243,7 +243,7 @@
     <object Name="BaseInstrument" Inherits="Tool">
         <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
         <part Name="Description" Short="A strange musical contraption"></part>
-        <part Name="Metal"></part>
+        <part Name="Commerce" Value="150" />
         <part Name="Examiner" AlternateDisplayName="contraption" Complexity="0" Difficulty="0"></part>
         <part Name="Physics" Category="Trinket" Weight="8"/>
         <tag Name="BaseObject" Value="*noinherit" />
@@ -253,13 +253,28 @@
     <object Name="Musical Instrument" Inherits="BaseInstrument">
       <part Name="Render" DisplayName="&amp;cmusical instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
       <part Name="Description" Short="A strange musical contraption"></part>
-      <part Name="Metal"></part>
       <part Name="TinkerItem" Bits="003" CanDisassemble="true" CanBuild="true" CanRepair="true" />
       <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
     </object>
 
 
 
+
+    <object Name="Furniture Instrument" Inherits="BaseInstrument">
+      <part Name="Render" DisplayName="&amp;cmusical instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
+      <part Name="Description" Short="A strange musical contraption"></part>
+      <part Name="acegiak_Musical" SoundName="oboe:25;inst1_breath:75" Generate="true"></part>
+
+      <tag Name="Furniture" Value="1" />
+      <tag Name="BaseObject" Value="*noinherit" />
+      <stag Name="InsideFurniture" />
+      <stag Name="InsideWallFurniture" />
+      <tag Name="NeverStack" />
+      <tag Name="NoAutoget" Value="1"></tag>
+      <part Name="Physics" Takeable="false" />
+
+    </object>
+    
 
     <!-- ===== SCAFFOLDING ===== -->
     <object Name="Creature" Load="Merge">

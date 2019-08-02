@@ -3,42 +3,42 @@
 
         <encountertable Name="Trinkets 1" Load="Merge">
                 <objects>
-                  <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                  <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                   </objects>
             </encountertable>
             <encountertable Name="Trinkets 2" Load="Merge">
                   <objects>
-                    <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                    <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                     </objects>
               </encountertable>
               <encountertable Name="Trinkets 3" Load="Merge">
                     <objects>
-                      <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                      <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                       </objects>
                 </encountertable>
                 <encountertable Name="Trinkets 4" Load="Merge">
                       <objects>
-                        <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                        <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                         </objects>
                   </encountertable>
                   <encountertable Name="Trinkets 5" Load="Merge">
                         <objects>
-                          <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                          <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                           </objects>
                     </encountertable>
                     <encountertable Name="Trinkets 6" Load="Merge">
                           <objects>
-                            <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                            <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                             </objects>
                       </encountertable>
                       <encountertable Name="Trinkets 7" Load="Merge">
                             <objects>
-                              <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                              <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                               </objects>
                         </encountertable>
                         <encountertable Name="Trinkets 8" Load="Merge">
                               <objects>
-                                <object Chance="35" Number="1d1" Blueprint="New Instrument"></object>
+                                <object Chance="35" Number="1d1" Blueprint="Musical Instrument"></object>
                                 </objects>
                           </encountertable>
     </encountertables>
