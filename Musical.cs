@@ -361,12 +361,20 @@ namespace XRL.World.Parts
 			ParentObject.pRender.Tile = tiles.GetRandomElement();
 			Double d = Stat.Rnd2.NextDouble()*3;
 			this.SoundName = "";
+			int remaining = 100;
 			for(int i = 0; i<d;i++){
 				if(i >0){
 					this.SoundName += ";";
 				}
 				this.SoundName += voices.GetRandomElement();
-				int tvol = Stat.Rnd2.Next(50)+25;
+				int tvol = 100;
+				if(i==d-1){
+					tvol = remaining;
+				}else{
+					tvol = Stat.Rnd2.Next(remaining);
+					remaining = remaining - tvol;
+				}
+				
 				this.SoundName = this.SoundName+":"+tvol.ToString();
 				Debug.Log(this.SoundName);
 			}
