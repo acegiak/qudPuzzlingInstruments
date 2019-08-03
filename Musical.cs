@@ -181,6 +181,8 @@ namespace XRL.World.Parts
                     //IPart.AddPlayerMessage("Effect:"+effect.DisplayName);
 					player.ApplyEffect(effect);
 			}
+			player.FireEvent(Event.New("PlayedSong", "Object", ParentObject));
+
 		
 		}
 
