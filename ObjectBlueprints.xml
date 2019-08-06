@@ -243,7 +243,7 @@
     <object Name="BaseInstrument" Inherits="Furniture">
         <part Name="Render" DisplayName="&amp;cpuzzling instrument" Tile="items/horn_01.png" ColorString="&amp;W" DetailColor="w"></part>
         <part Name="Description" Short="A strange musical contraption"></part>
-        <part Name="Commerce" Value="150" />
+        <part Name="Commerce" Value="50" />
         <part Name="Examiner" AlternateDisplayName="contraption" Complexity="0" Difficulty="0"></part>
         <part Name="Physics" Category="Trinket" Weight="8"/>
         <tag Name="BaseObject" Value="*noinherit" />

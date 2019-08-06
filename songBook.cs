@@ -241,7 +241,7 @@ namespace XRL.World.Parts
 		{
             if(E.ID=="AIBored"){
                 if(ParentObject.GetPart<Inventory>() != null){
-                    if(XRLCore.Core.Game.TimeTicks - lastPlayed > 20){
+                    if(XRLCore.Core.Game.TimeTicks - lastPlayed > 100){
                         lastPlayed = XRLCore.Core.Game.TimeTicks;
                     
                         foreach(GameObject GO in ParentObject.GetPart<Inventory>().GetObjects()){
