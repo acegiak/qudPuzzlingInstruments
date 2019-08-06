@@ -121,7 +121,7 @@ namespace XRL.World.Parts
 			}
 			if (E.ID == "CanSmartUse")
 			{
-				return false;
+				return true;
 			}
 			if (E.ID == "CommandSmartUse")
 			{
