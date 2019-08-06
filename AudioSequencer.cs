@@ -162,7 +162,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
     }
 
     public static float ParseFloat(string f){
-        Debug.Log("PARSEFLOAT:"+f);
+        //Debug.Log("PARSEFLOAT:"+f);
         return (float)double.Parse(f,System.Globalization.NumberStyles.AllowDecimalPoint);
     }
     public static float HzToMulti(float targetHz){
