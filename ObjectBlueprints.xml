@@ -249,6 +249,7 @@
         <tag Name="BaseObject" Value="*noinherit" />
         <tag Name="QuestableVerb" Value="play"></tag>
         <tag Name="QuestableEvent" Value="PlayedSong"></tag>
+        <tag Name="ForceSmartUse" />
 
         <tag Name="HeroNameTitleTemplate" Value="*Name* the *Descriptor*, legendary *CreatureType*;*Name*, legendary *CreatureType* and friend to *Noun*" />
         <tag Name="HeroNameTitleDescriptor" Value="Sturdy,Three-Legged,Short-Legged,Straight-Backed,Comfy" />
