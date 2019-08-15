@@ -286,9 +286,9 @@
       <tag Name="NeverStack" />
       <tag Name="NoAutoget" Value="1"></tag>
       <part Name="Physics" Takeable="false" />
-      <stag Name="Luxury"></stag>
+      <stag Name="Luxury"/>
       <stag Name="Scholarly" />
-      <stag Name="Centerpiece"></stag>
+      <stag Name="Centerpiece"/>
       <stag Name="Professional" />
       <stag Name="Esper" />
       <stag Name="Basic" />

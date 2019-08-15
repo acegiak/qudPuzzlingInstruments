@@ -14,6 +14,7 @@ using System.Linq;
 using HistoryKit;
 using XRL.Language;
 using System.Text;
+using Qud.API;
 
 
 namespace XRL.World.Parts
@@ -242,6 +243,9 @@ namespace XRL.World.Parts
 
 
 					book.Songs.Add(song);
+
+					JournalAPI.AddAccomplishment("You wrote a song: "+song.Name);
+					JournalAPI.AddObservation(song.Name,song.Name,"Songs",null,null,true);
 				}
 				
 			}

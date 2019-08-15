@@ -284,6 +284,9 @@ namespace XRL.World.Parts
                                     XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>().Songs.Add(this.Songs[0]);
 									this.learnedFrom = true;
 									Popup.Show("You learned to play "+this.Songs[0].Name);
+
+									JournalAPI.AddAccomplishment("You learned to play "+this.Songs[0].Name);
+									JournalAPI.AddObservation(FactionInfo.getFormattedName(ParentObject.pBrain.GetPrimaryFaction())+" play a song called \""+this.Songs[0].Name+"\"",this.Songs[0].Name,"Songs",null,null,true);
 									XRLCore.Core.Game.PlayerReputation.modify(Factions.FactionList[ParentObject.pBrain.GetPrimaryFaction()].Name, -50,false);
 
 									return true;
