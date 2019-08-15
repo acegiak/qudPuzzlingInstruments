@@ -180,8 +180,12 @@ namespace XRL.World.Parts
 						List<string> musictags = sample.GetTag("musictags").Split(',').ToList();
 						if(sample.GetTag("musictags") == "*" || tags.Where(b=>musictags.Contains(b)).Any()){
                             if(sample.HasTag("musicmodifier")){
-                                acegiak_SongMod mod = Activator.CreateInstance(Type.GetType(sample.GetTag("musicmodifier"))) as acegiak_SongMod;
-                                mods.Add(mod);
+                                try{
+                                    acegiak_SongMod mod = Activator.CreateInstance(Type.GetType(sample.GetTag("musicmodifier"))) as acegiak_SongMod;
+                                    mods.Add(mod);
+                                }catch(Exception E){
+                                    Debug.Log("CAVES OF CHORDS COULD NOT LOAD MUSIC MOD: "+sample.GetTag("musicmodifier"));                          
+                                }
                             }
                         }
                     }

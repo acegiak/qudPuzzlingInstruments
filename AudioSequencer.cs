@@ -3,6 +3,7 @@ using UnityEngine;
 using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 
@@ -13,6 +14,7 @@ public class acegiak_Note{
     public float length;
 
     public float volume = 1f;
+
 
     private GameObject _voiceHolder;
     public AudioSource voice{
@@ -71,6 +73,22 @@ public class acegiak_AudioSequencer : MonoBehaviour
     public float? Rtime = null;
     public GameObject GO;
 
+
+    Dictionary<string,float> keynotes = new Dictionary<string,float>(){
+        {"1",174.61f},
+        {"2",196.00f},
+        {"3",220.00f},
+        {"4",246.94f},
+        {"5",261.63f},
+        {"6",293.66f},
+        {"7",329.63f},
+        {"8",349.23f},
+        {"9",392.00f},
+        {"0",440.00f},
+        {"-",493.88f},
+        {"=",523.25f}
+    };
+
     public string recordVoice = "oboe";
     public float recordVolume = 1f;
     public void Play(){
@@ -106,33 +124,35 @@ public class acegiak_AudioSequencer : MonoBehaviour
 
             time += Time.deltaTime;
         }
+        
+        
 
         if(Rtime != null){
-            for(int i=0;i<10;i++){
+            foreach(string i in keynotes.Keys.ToList()){
                 float rtime = Rtime ?? 0f;
-                if (Input.GetKeyDown(i.ToString())){
+                if (Input.GetKeyDown(i)){
                     if(notes.Count == 0){
                         Rtime = 0.01f;
                         rtime = 0.01f;
                     }
-                    acegiak_Note note =  new acegiak_Note(recordVoice,HzToMulti((i+1)*110f),rtime,0f);
+                    acegiak_Note note =  new acegiak_Note(recordVoice,HzToMulti((keynotes[i]*2)),rtime,0f);
                     note.volume = recordVolume;
                     note.Play();
                     notes.Add(note);
-                    Debug.Log("START: "+i.ToString() );
+                    Debug.Log("START: "+i );
                 }
-                if (Input.GetKeyUp(i.ToString())){
+                if (Input.GetKeyUp(i)){
                     foreach(acegiak_Note note in notes){
-                        if(note.pitch == HzToMulti((i+1)*110f) && note.length == 0){
+                        if(note.pitch == HzToMulti((keynotes[i]*2)) && note.length == 0){
                             note.length = rtime - note.begin;
                             note.Stop();
 
-                            Debug.Log("END: "+i.ToString() );
+                            Debug.Log("END: "+i );
                         }
                     }
                 }
             }
-            if (Input.GetKeyDown("return")){
+            if (Input.GetKeyDown("return") || Input.GetKeyDown("escape")){
                 Rtime = null;
             }
 
