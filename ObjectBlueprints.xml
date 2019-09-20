@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objects>
+    <object Name="DoNotUse_musicitemInitializer" Inherits="Item">
+        <part Name="Render" DisplayName="[Dummy item for operatingtables]" />
+        <part Name="acegiak_musicpopinit" />
+        <tag Name="ExcludeFromDynamicEncounters" />
+    </object>
+
 <!-- Body, Head, Face, Back, Arm, Hand, Foot, Hands, Feet, Fungal Outcrop,
   Fin, Roots, Tail, Tread, Corpse, Artifacts, Missile Weapon, Melee Weapon, Projectile,
   Armor, Shields, Grenades, Creature, Nest, Natural Weapon, Natural Missile Weapon,
