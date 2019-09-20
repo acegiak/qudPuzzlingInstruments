@@ -177,10 +177,14 @@ namespace XRL.World.Parts
 			IPart.AddPlayerMessage((player.IsPlayer()?"You play":player.The+player.DisplayNameOnly+player.GetVerb("play"))+" "+song.Name+" on "+ParentObject.the+ParentObject.DisplayNameOnly);
 			if(song.Effect != null){
                     //IPart.AddPlayerMessage("Effect:"+song.Effect);
+					try{
                     Effect effect = Activator.CreateInstance(Type.GetType(song.Effect)) as Effect;
 					//effect.Duration = Stat.Rnd2.Next(100);
                     //IPart.AddPlayerMessage("Effect:"+effect.DisplayName);
 					player.ApplyEffect(effect);
+					}catch(Exception E){
+                        Debug.Log("CAVES OF CHORDS COULD NOT LOAD PLAYER EFFECT: "+song.Effect);                          
+                    }
 			}
 			player.FireEvent(Event.New("PlayedSong", "Object", ParentObject));
 
