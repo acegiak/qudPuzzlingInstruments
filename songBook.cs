@@ -104,7 +104,7 @@ namespace XRL.World.Parts
         public acegiak_Song MakeItCultural(acegiak_Song song, string faction){
             if(song.Themes != null){
                 List<string> songwords = new List<string>{"song","tune","lullabye","sound","call","tone"};
-                string FactionFancy = Factions.FactionList[faction].DisplayName;
+                string FactionFancy = Factions.get(faction).DisplayName;
                 string theme = song.Themes.GetRandomElement();
                 string themeShort = theme.Replace("the ","").Replace("ing","");
                 switch(Stat.Rnd2.Next(8)){
@@ -291,7 +291,7 @@ namespace XRL.World.Parts
 
 									JournalAPI.AddAccomplishment("You learned to play "+this.Songs[0].Name);
 									JournalAPI.AddObservation(FactionInfo.getFormattedName(ParentObject.pBrain.GetPrimaryFaction())+" play a song called \""+this.Songs[0].Name+"\"",this.Songs[0].Name,"Songs",null,null,true);
-									XRLCore.Core.Game.PlayerReputation.modify(Factions.FactionList[ParentObject.pBrain.GetPrimaryFaction()].Name, -50,false);
+									XRLCore.Core.Game.PlayerReputation.modify(Factions.get(ParentObject.pBrain.GetPrimaryFaction()).Name, -50,false);
 
 									return true;
 								};

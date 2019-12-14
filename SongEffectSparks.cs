@@ -8,14 +8,14 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectBeserk : acegiak_SongEffect
+	public class acegiak_SongEffectSparks : acegiak_SongEffect
 	{
-		public acegiak_SongEffectBeserk()
+		public acegiak_SongEffectSparks()
 		{
-			base.DisplayName = "&Cbattlesong";
+			base.DisplayName = "&Csparksong";
 		}
 
-		public acegiak_SongEffectBeserk(int _Duration)
+		public acegiak_SongEffectSparks(int _Duration)
 			: this()
 		{
 			Duration = _Duration;
@@ -23,7 +23,7 @@ namespace XRL.World.Parts.Effects
 
 		public override string GetDetails()
 		{
-			return "inspiring to battle";
+			return "inspiring to the insight";
 
 		}
 
@@ -44,14 +44,25 @@ namespace XRL.World.Parts.Effects
 						if (Object.DistanceTo(item) <= radius && item.pBrain != null)
 						{
                             if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied){
-							
-                                item.ApplyEffect(new acegiak_CloneBeserk(10* Stat.Random(1, 10)));
+
+								List<Effect> remove = new List<Effect>();
+								foreach (Effect effect in item.Effects)
+								{
+									if(effect is acegiak_SongEffect){
+										remove.Add(effect);
+									}
+								}
+								foreach(Effect effect in remove){
+									item.RemoveEffect(effect);
+								}
+
+                                item.ApplyEffect(new acegiak_SongEffectSpark(10* Stat.Random(1, 10)));
                                 if(item.IsPlayer()){
-					                Popup.Show("You are inspired to battle!");
+					                Popup.Show("You gain an air of insight.");
                                 }else{
-                                    IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to battle!");
+                                    IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to insight.");
                                 }
-                            }
+							}
 						}
 					}
 				}

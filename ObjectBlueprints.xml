@@ -79,11 +79,19 @@
         <tag Name="musicthemes" Value="travel,wander"/>
     </object>
 
+    <object Name="sparkysong" Inherits="Song">
+        <tag Name="musicnotes"
+        Value="440,0.01,0.3;660,0.01,0.3;495,0.4,0.3;742.5,0.4,0.3;693,0.7,0.3;1039.5,0.7,0.3;440,1.1,0.2;660,1.3,0.15;495,1.5,0.2;742.5,1.7,0.15;693,1.9,0.2;693,2.1,0.15;660,2.2,0.15;693,2.3,0.15;495,2.4,0.15;440,2.5,0.3"/>
+        <tag Name="musictags" Value="Missile Weapon,Projectile,Ammo,Miscellaneous,Tread,Data Disk,Cybernetic Implants,Trinket,Tools,Scrap,Grenades"/> <!-- sparks -->
+        <tag Name="musiceffect" Value="acegiak_SongEffectSparks"/> <!--restores thirst -->
+        <tag Name="musicthemes" Value="sparks,tinker,engineer"/>
+    </object>
+
     <object Name="Go To Sleep" Inherits="Song">
         <tag Name="musicnotes"
         Value="330,0.01,2;359,0.3,0.15;462,0.45,2;528,0.45,2;330,2.45,2;500,2.45,2;220,4.45,1;264,5.45,1;220,6,2"/> 
         <tag Name="musictags" Value="Head,Roots,Books,Meds,Tonics,Applicators,Food,Terrain,Liquids,Creature,Plant,Data Disk,Cybernetic Implants"/><!-- Healer -->
-        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectSleep"/> <!-- puts nearby people to sleep-->
+        <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectSleep,acegiak_SongEffectMeditate"/> <!-- puts nearby people to sleep-->
         <tag Name="musicthemes" Value="sleep,rest,calm,nod"/>
     </object>
 
@@ -97,15 +105,15 @@
 
   <object Name="Phantom" Inherits="Song">
       <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/><!-- Shadow -->
-      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectCamo"/> <!--sets nearby people on fire -->
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFear"/>
       <tag Name="musicnotes"
     Value="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;"/>
-      <tag Name="musicthemes" Value="shadow,mystery,hidden"/>
+      <tag Name="musicthemes" Value="shadow,mystery,fear"/>
   </object>
 
   <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
       <tag Name="musictags" Value="Clothes,Trade Goods,Energy Cell,Fin,Roots,Tail,Face,Trinket,Quest Items,Artifacts,Armor"/> <!-- Peacock -->
-      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectDazzling"/> <!--sets nearby people on fire -->
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectDazzling"/>
       <tag Name="musicnotes"
     Value="275,0.01,0.2;299.9975,0.01,0.2;275,0.5,0.2;299.9975,0.5,0.2;299.9975,1,0.2;412.5,1,0.2;299.9975,1.5,0.2;412.5,1.5,0.2;366.6575,2,0.2;458.3435,2,0.2;366.6575,2.5,0.2;458.3435,2.5,0.2;412.5,3,0.2;504.1575,3.25,0.2;412.5,3.5,0.2;504.1575,4,0.2;"/>
       <tag Name="musicthemes" Value="display,friendship,flirting,fascination,wonder"/>
