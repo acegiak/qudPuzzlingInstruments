@@ -105,10 +105,10 @@
 
   <object Name="Phantom" Inherits="Song">
       <tag Name="musictags" Value="Body,Tail,Light Source,Fin,Scrap,Applicators,Tonics,Natural Weapon,Natural Missile Weapon"/><!-- Shadow -->
-      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFear"/>
+      <tag Name="musiceffect" Value="XRL.World.Parts.Effects.acegiak_SongEffectFear,XRL.World.Parts.Effects.acegiak_SongEffectWhisper"/>
       <tag Name="musicnotes"
     Value="440,0.01,1;403.326,1,0.1;385,1.25,0.1;366.674,1.5,0.1;392.8,1.75,0.1;330,2,0.1;308,2.25,0.1;294.326,2.5,1;"/>
-      <tag Name="musicthemes" Value="shadow,mystery,fear"/>
+      <tag Name="musicthemes" Value="shadow,mystery,dark,whispersong"/>
   </object>
 
   <object Name="Wake Up In The Morning Feeling Like P.Diddy" Inherits="Song">
