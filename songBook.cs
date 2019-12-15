@@ -347,6 +347,21 @@ namespace XRL.World.Parts
                 }
             }
 
+            string[] stats = {"Intelligence","Ego","Wisdom","Toughness","Strength","Agility"};
+            string s = null;
+            int? n = null;
+            foreach(string stat in stats){
+                if(sample.HasStat(stat)){
+                    if(s == null || n == null || sample.GetStatValue(stat) >n || (sample.GetStatValue(stat) == n && Stat.Rnd2.NextDouble() < 0.5f)){
+                        n = sample.GetStatValue(stat);
+                        s = stat;
+                    }
+                }
+            }
+            if(s != null){
+                tags.Add(s);
+            }
+
             tags.Add(sample.pRender.GetForegroundColor());
             tags.Add(sample.pRender.DetailColor);
             return tags;
