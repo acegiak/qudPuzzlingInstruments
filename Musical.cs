@@ -90,10 +90,16 @@ namespace XRL.World.Parts
 		public override bool FireEvent(Event E)
 		{
 			Make();
-			if (E.ID == "GetInventoryActions" && XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music"))
+			if (E.ID == "GetInventoryActions" )
 			{
-				E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("PlayTune", 'p', false, "&Wp&ylay a tune", "InvCommandPlayTune", 10);
-				E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("ComposeTune", 'C', false, "&WC&yompose a tune", "InvCommandComposeTune", 10);
+				if(XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music")){
+					E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("ComposeTune", 'C', false, "&WC&yompose a tune", "InvCommandComposeTune", 10);
+
+					E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("PlayTune", 'p', false, "&Wp&ylay a tune", "InvCommandPlayTune", 10);
+				}else{
+					E.GetParameter<EventParameterGetInventoryActions>("Actions").AddAction("ComposeTune", 'p', false, "&Wp&ylay", "InvCommandComposeTune", 10);
+				}					
+
 			}
 			if (E.ID == "InvCommandPlayTune")
 			{
@@ -233,26 +239,26 @@ namespace XRL.World.Parts
 			// 	};
 			// acegiak_CustomPopup.CustomRender(p,20,10);
 
+			if(XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music")){
+				string songname = Popup.AskString("Name this song. (leave blank to forget)","",140);
+				if(songname != null && songname.Length > 0){
+					acegiak_SongBook book = who.GetPart<acegiak_SongBook>();
+					if(book == null){
+						Popup.Show(who.The+who.DisplayNameOnly+" can't remember songs.");
+					}else{
+						acegiak_Song song = new acegiak_Song();
+						song.Name = songname;
+						song.Notes = GOs[0].GetComponent<acegiak_AudioSequencer>().Print();
+						book.Songs.Add(song);
 
-			string songname = Popup.AskString("Name this song. (leave blank to forget)","",140);
-			if(songname != null && songname.Length > 0){
-				acegiak_SongBook book = who.GetPart<acegiak_SongBook>();
-				if(book == null){
-					Popup.Show(who.The+who.DisplayNameOnly+" can't remember songs.");
-				}else{
-					acegiak_Song song = new acegiak_Song();
-					song.Name = songname;
-					song.Notes = GOs[0].GetComponent<acegiak_AudioSequencer>().Print();
-
-
-
-					book.Songs.Add(song);
-
-					JournalAPI.AddAccomplishment("You wrote a song: "+song.Name);
-					JournalAPI.AddObservation(song.Name,song.Name,"Songs",null,null,true);
+						JournalAPI.AddAccomplishment("You wrote a song: "+song.Name);
+						JournalAPI.AddObservation(song.Name,song.Name,"Songs",null,null,true);
+					}
+					
 				}
-				
 			}
+
+			who.FireEvent(Event.New("PlayedSong", "Object", ParentObject));
             
         }
 
