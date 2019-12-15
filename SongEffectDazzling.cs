@@ -35,7 +35,7 @@ namespace XRL.World.Parts.Effects
 
 		public override bool Apply(GameObject Object)
 		{
-            Object.ApplyEffect(new Emboldened(5*Stat.Roll("1d10"),"Ego",2));
+            //Object.ApplyEffect(new Emboldened(5*Stat.Roll("1d10"),"Ego",2));
             int radius = 20;
             Cell currentCell = Object.CurrentCell;
 				if (currentCell != null)

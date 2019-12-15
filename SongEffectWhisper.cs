@@ -8,14 +8,14 @@ using XRL.UI;
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectBeserk : acegiak_SongEffect
+	public class acegiak_SongEffectWhisper : acegiak_SongEffect
 	{
-		public acegiak_SongEffectBeserk()
+		public acegiak_SongEffectWhisper()
 		{
-			base.DisplayName = "&Cbattlesong";
+			base.DisplayName = "&Cwhispersong";
 		}
 
-		public acegiak_SongEffectBeserk(int _Duration)
+		public acegiak_SongEffectWhisper(int _Duration)
 			: this()
 		{
 			Duration = _Duration;
@@ -23,7 +23,7 @@ namespace XRL.World.Parts.Effects
 
 		public override string GetDetails()
 		{
-			return "inspiring to battle";
+			return "inspiring to secrets";
 
 		}
 
@@ -45,11 +45,11 @@ namespace XRL.World.Parts.Effects
 						{
                             if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied){
 							
-                                item.ApplyEffect(new acegiak_CloneBeserk(10* Stat.Random(1, 10)));
+                                item.ApplyEffect(new acegiak_SongSecondaryEffectWhisper(10* Stat.Random(1, 10)));
                                 if(item.IsPlayer()){
-					                Popup.Show("You are inspired to battle!");
+					                Popup.Show("You are inspired to secrets!");
                                 }else{
-                                    IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to battle!");
+                                    IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to secrets!");
                                 }
                             }
 						}

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using XRL.World;
 using XRL.Rules;
 using XRL.World.Parts;
-using XRL.UI;
+using XRL.World.Parts.Mutation;
 
 namespace XRL.World.Parts.Effects
 {
 	[Serializable]
-	public class acegiak_SongEffectBeserk : acegiak_SongEffect
+	public class acegiak_SongEffectFear : acegiak_SongEffect
 	{
-		public acegiak_SongEffectBeserk()
+		public acegiak_SongEffectFear()
 		{
-			base.DisplayName = "&Cbattlesong";
+			base.DisplayName = "&Rterrible";
 		}
 
-		public acegiak_SongEffectBeserk(int _Duration)
+		public acegiak_SongEffectFear(int _Duration)
 			: this()
 		{
 			Duration = _Duration;
@@ -23,7 +23,7 @@ namespace XRL.World.Parts.Effects
 
 		public override string GetDetails()
 		{
-			return "inspiring to battle";
+			return "terrifying those nearby";
 
 		}
 
@@ -43,15 +43,12 @@ namespace XRL.World.Parts.Effects
 					{
 						if (Object.DistanceTo(item) <= radius && item.pBrain != null)
 						{
-                            if(item.pBrain.GetOpinion(Object) == Brain.CreatureOpinion.allied){
-							
-                                item.ApplyEffect(new acegiak_CloneBeserk(10* Stat.Random(1, 10)));
-                                if(item.IsPlayer()){
-					                Popup.Show("You are inspired to battle!");
-                                }else{
-                                    IPart.AddPlayerMessage(item.The+item.DisplayNameOnly+item.Is+" inspired to battle!");
-                                }
-                            }
+							int mod = 1;
+							if(Object.Statistics["Ego"].Modifier > 0){
+								mod += Object.Statistics["Ego"].Modifier;
+							}
+                            Fear.ApplyFearToObject(mod.ToString()+"d8", Stat.Roll("1d20")+mod, item, Object);
+
 						}
 					}
 				}

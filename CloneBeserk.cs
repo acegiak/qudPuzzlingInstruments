@@ -9,7 +9,7 @@ namespace XRL.World.Parts.Effects
 	{
 		public acegiak_CloneBeserk()
 		{
-			base.DisplayName = "berserk";
+			base.DisplayName = "inspired to battle";
 		}
 
 		public acegiak_CloneBeserk(int _Duration)
@@ -25,62 +25,76 @@ namespace XRL.World.Parts.Effects
 
 		public override string GetDetails()
 		{
-			return "100% chance to dismember with axes.";
+			return "&W+1 to hit&y";
 		}
 
-		public override bool Apply(GameObject Object)
-		{
-			return true;
-		}
+		// public override bool Apply(GameObject Object)
+		// {
+		// 	return true;
+		// }
 
-		public override void Remove(GameObject Object)
-		{
-			base.Remove(Object);
-		}
+		// public override void Remove(GameObject Object)
+		// {
+		// 	base.Remove(Object);
+		// }
 
 		public override void Register(GameObject Object)
 		{
-			Object.RegisterEffectEvent(this, "BeginTakeAction");
+			Object.RegisterEffectEvent(this, "AttackerRollMeleeToHit");
 			base.Register(Object);
 		}
 
 		public override void Unregister(GameObject Object)
 		{
-			Object.UnregisterEffectEvent(this, "BeginTakeAction");
+			Object.UnregisterEffectEvent(this, "AttackerRollMeleeToHit");
 			base.Unregister(Object);
 		}
 
-		public override bool Render(RenderEvent E)
+		// public override bool Render(RenderEvent E)
+		// {
+		// 	if (Duration == 0)
+		// 	{
+		// 		return true;
+		// 	}
+		// 	int num = XRLCore.CurrentFrame % 60;
+		// 	if (num > 45 && num < 55)
+		// 	{
+		// 		E.Tile = null;
+		// 		E.RenderString = "!";
+		// 		E.ColorString = "&R";
+		// 	}
+		// 	return true;
+		// }
+
+
+
+
+		public override bool Apply(GameObject Object)
 		{
-			if (Duration == 0)
+			// Object.RegisterEffectEvent(this, "AttackerRollMeleeToHit");
+			if (Object.IsPlayer())
 			{
-				return true;
-			}
-			int num = XRLCore.CurrentFrame % 60;
-			if (num > 45 && num < 55)
-			{
-				E.Tile = null;
-				E.RenderString = "!";
-				E.ColorString = "&R";
+				//Popup.Show(wellFedMessage + "\n\n&W+1 to hit for the rest of the day&y");
 			}
 			return true;
 		}
 
+		public override void Remove(GameObject Object)
+		{
+			// Object.UnregisterEffectEvent(this, "AttackerRollMeleeToHit");
+			base.Remove(Object);
+		}
+
 		public override bool FireEvent(Event E)
 		{
-			if (E.ID == "BeginTakeAction")
+			if (E.ID == "AttackerRollMeleeToHit")
 			{
-				if (Duration > 0)
-				{
-					Duration--;
-				}
-				if (Duration > 0 && Object.IsPlayer())
-				{
-					//MessageQueue.AddPlayerMessage(Duration + " turns remain until your berserker rage ends.");
-				}
+				E.AddParameter("Result", (int)E.GetParameter("Result") + 1);
 				return true;
 			}
 			return base.FireEvent(E);
 		}
+
+
 	}
 }
