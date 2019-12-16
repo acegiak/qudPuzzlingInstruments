@@ -38,6 +38,12 @@ namespace XRL.World.Parts.Effects
 			return base.GetDetails()+"\nGrants strange insights into the meanings within words.";
 		}
 
+		public void ChanceToLearn(){
+			if(Object.IsPlayer() && Stat.Roll("1d20") + Object.StatMod("Intelligence")>18){
+                    	JournalAPI.RevealRandomSecret();
+					}
+		}
+
         public override bool FireEvent(Event E){
             if (E.ID == "AccomplishmentAdded")
 			{
@@ -45,12 +51,16 @@ namespace XRL.World.Parts.Effects
 				string text = E.GetStringParameter("Text");
 				if(text.Contains("You read ")){
 
-					if(Object.IsPlayer() && Stat.Roll("1d20") + Object.StatMod("Intelligence")>18){
-                    	JournalAPI.RevealRandomSecret();
-					}
+					ChanceToLearn();
 				}
 
 				return true;
+			}
+			if(E.ID == "LookedAt" && E.GetGameObjectParameter("Object").GetPart<Graffitied>() != null){
+				if(E.GetGameObjectParameter("Object").GetPart<Graffitied>().ChanceOneIn > 10000){
+					ChanceToLearn();
+					E.GetGameObjectParameter("Object").GetPart<Graffitied>().ChanceOneIn = 10001;
+				}
 			}
 
             return base.FireEvent(E);
