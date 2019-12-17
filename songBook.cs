@@ -317,9 +317,14 @@ namespace XRL.World.Parts
             if(factionMusicTags().ContainsKey(factionName)){
                 return factionMusicTags()[factionName];
             }
-            GameObject sample = EncountersAPI.GetASampleCreatureFromFaction(factionName);
-            //IPart.AddPlayerMessage(factionName);
-            List<string> tags = FromCreatureTags(sample);
+            int count = 0;
+            List<string> tags = new List<string>();
+            while(tags.Count < 1 && count < 5){
+                GameObject sample = EncountersAPI.GetASampleCreatureFromFaction(factionName);
+                //IPart.AddPlayerMessage(factionName);
+                tags = FromCreatureTags(sample);
+                count++;
+            }
             factionMusicTags()[factionName] = tags;
             return tags;
         }
