@@ -8,12 +8,13 @@ using System.Collections.Generic;
 
 
 public class acegiak_Note{
+    public static float basevolume = 2f;
     public string sample;
     public float pitch;
     public float begin;
     public float length;
 
-    public float volume = 1f;
+    public float volume = basevolume;
 
 
     private GameObject _voiceHolder;
@@ -29,7 +30,7 @@ public class acegiak_Note{
                 gameObject.GetComponent<AudioLowPassFilter>().cutoffFrequency = 22000f * 0.7f;
                 gameObject.GetComponent<AudioSource>().clip = SoundManager.GetClip("Level_Up_Other");
                 gameObject.GetComponent<AudioSource>().pitch = 1f;
-                gameObject.GetComponent<AudioSource>().volume = 1f;
+                gameObject.GetComponent<AudioSource>().volume = basevolume;
                 gameObject.GetComponent<AudioSource>().loop = true;
                 UnityEngine.Object.DontDestroyOnLoad(gameObject);
                 _voiceHolder = gameObject;
@@ -90,7 +91,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
     };
 
     public string recordVoice = "oboe";
-    public float recordVolume = 1f;
+    public float recordVolume = acegiak_Note.basevolume;
     public void Play(){
         time = 0;
     }
