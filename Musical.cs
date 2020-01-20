@@ -82,9 +82,9 @@ namespace XRL.World.Parts
 			}
 		}
 
-		public override bool BeforeRender(Event E){
+		public bool HandleEvent(BeforeRenderEvent E){
 			Make();
-			return base.BeforeRender(E);
+			
 		}
 
 		public override bool FireEvent(Event E)
