@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using XRL.Core;
 using XRL.Rules;
 using XRL.UI;
+using XRL.World.Parts;
 
-namespace XRL.World.Parts.Effects
+namespace XRL.World.Effects
 {
 	[Serializable]
 	public class acegiak_HunterSong : acegiak_SongEffect

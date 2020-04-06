@@ -4,8 +4,9 @@ using XRL.Core;
 using XRL.Rules;
 using XRL.UI;
 using Qud.API;
+using XRL.World.Parts;
 
-namespace XRL.World.Parts.Effects
+namespace XRL.World.Effects
 {
 	[Serializable]
 	public class acegiak_SongSecondaryEffectAdventure : acegiak_SongEffect

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using XRL.UI;
-using XRL.World.Parts.Effects;
+using XRL.World.Effects;
 using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using System.IO;
@@ -238,6 +238,7 @@ namespace XRL.World.Parts
 
 		public bool HandleEvent(BeforeRenderEvent E){
 			Make();
+            return true;
 		}
 
 		public override bool FireEvent(Event E)

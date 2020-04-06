@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using XRL.UI;
-using XRL.World.Parts.Effects;
+using XRL.World.Effects;
 using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using System.IO;
@@ -84,7 +84,7 @@ namespace XRL.World.Parts
 
 		public bool HandleEvent(BeforeRenderEvent E){
 			Make();
-			
+			return true;
 		}
 
 		public override bool FireEvent(Event E)
@@ -322,6 +322,7 @@ namespace XRL.World.Parts
 			List<string> verbs = new List<string>{"believe in"};
 			List<string> parts = new List<string>{"body"};
 			List<string> descriptors = new List<string>{"musical"};
+			List<string> sounds = new List<string>{"loud"};
 
 			List<string> colors = fromtags.Where(b=>b.Length == 1).ToList();
 
@@ -365,14 +366,24 @@ namespace XRL.World.Parts
 							if(sample.HasTag("descriptors")){
 								descriptors = sample.GetTag("descriptors").Split(',').ToList().Union(descriptors).ToList();
 							}
+							if(sample.HasTag("moods")){
+								sounds = sample.GetTag("moods").Split(',').ToList().Union(sounds).ToList();
+							}
 						}
 
 					}
 				}
 			}
 
+			if(tiles.Count>0){
+				ParentObject.pRender.Tile = tiles.GetRandomElement();
+			}else{
+				ParentObject.pRender.Tile = "Items/sw_toolbox.bmp";
+			}
 
-			ParentObject.pRender.Tile = tiles.GetRandomElement();
+			if(voices.Count <0){
+				voices.Add("oboe");
+			}
 			Double d = Stat.Rnd2.NextDouble()*3;
 			this.SoundName = "";
 			int remaining = 100;
@@ -408,17 +419,23 @@ namespace XRL.World.Parts
 					newname = prefixes.GetRandomElement()+infixes.GetRandomElement()+newname;
 				}
 
-
-				ParentObject.GetPart<Description>().Short = "A "+descriptors.GetRandomElement()+" instrument favoured by "+FactionInfo.getFormattedName(Faction)+". To play it, one "+
+				string nameset =  "A "+descriptors.GetRandomElement()+" instrument favoured by "+FactionInfo.getFormattedName(Faction)+". To play it, one "+
 				verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
 				" the "+parts.GetRandomElement()+((Stat.Rnd2.NextDouble()<0.5f)?(" and the "+parts.GetRandomElement()):"");
 				if(Stat.Rnd2.NextDouble() < 0.5f){
-					ParentObject.GetPart<Description>().Short += " and "+verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
+					nameset += " and "+verbForm(verbs.GetRandomElement())+((Stat.Rnd2.NextDouble()<0.5f)?(" and "+verbForm(verbs.GetRandomElement())):"")+
 				" the "+parts.GetRandomElement()+((Stat.Rnd2.NextDouble()<0.5f)?(" and the "+parts.GetRandomElement()):"");
 				}
-				ParentObject.GetPart<Description>().Short += ".";
+				nameset += ". It "+(new List<string>{"produces","emits","creates"}).GetRandomElement();
 
-				ParentObject.GetPart<Description>().Short = Grammar.ConvertAtoAn(ParentObject.GetPart<Description>().Short);
+				nameset += " a "+sounds.GetRandomElement();
+				while(Stat.Rnd2.NextDouble() < 0.5f){
+					nameset+= ", "+sounds.GetRandomElement();
+				}
+				nameset += " "+(new List<string>{"sound","tone","noise","song"}).GetRandomElement();
+				nameset += ".";
+
+				ParentObject.GetPart<Description>().Short = Grammar.ConvertAtoAn(nameset);
 
 
 				ParentObject.pRender.DisplayName = newname;

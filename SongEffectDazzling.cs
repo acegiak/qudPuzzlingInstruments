@@ -6,7 +6,7 @@ using XRL.World.Parts;
 using XRL.UI;
 using XRL.Language;
 
-namespace XRL.World.Parts.Effects
+namespace XRL.World.Effects
 {
 	[Serializable]
 	public class acegiak_SongEffectDazzling : acegiak_SongEffect

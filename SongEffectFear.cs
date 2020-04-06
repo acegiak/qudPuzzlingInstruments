@@ -5,7 +5,7 @@ using XRL.Rules;
 using XRL.World.Parts;
 using XRL.World.Parts.Mutation;
 
-namespace XRL.World.Parts.Effects
+namespace XRL.World.Effects
 {
 	[Serializable]
 	public class acegiak_SongEffectFear : acegiak_SongEffect
