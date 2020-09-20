@@ -38,7 +38,7 @@ namespace XRL.World.Effects
             Cell currentCell = Object.CurrentCell;
 				if (currentCell != null)
 				{
-					List<GameObject> list = currentCell.ParentZone.FastSquareSearch(currentCell.X, currentCell.Y, radius, "Combat", null);
+					List<GameObject> list = currentCell.ParentZone.FastSquareSearch(currentCell.X, currentCell.Y, radius, "Combat");
 					foreach (GameObject item in list)
 					{
 						if (Object.DistanceTo(item) <= radius && item.pBrain != null)

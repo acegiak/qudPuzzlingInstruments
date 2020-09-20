@@ -59,7 +59,7 @@ namespace XRL.World.Effects
 				if (currentCell != null)
 				{
 					int radius = 40;
-					List<GameObject> list = currentCell.ParentZone.FastSquareSearch(currentCell.X, currentCell.Y, radius, "Combat", null);
+					List<GameObject> list = currentCell.ParentZone.FastSquareSearch(currentCell.X, currentCell.Y, radius, "Combat");
 					foreach (GameObject item in list)
 					{
 						if (Object.DistanceTo(item) <= radius && !item.HasEffect("HeightenedHearingEffect"))

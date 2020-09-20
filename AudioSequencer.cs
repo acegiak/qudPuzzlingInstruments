@@ -4,7 +4,6 @@ using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 
 
 public class acegiak_Note{
@@ -60,7 +59,7 @@ public class acegiak_Note{
         _voiceHolder = null;
     }
 
-    public string ToString(){
+    public override string ToString(){
         return Math.Round(acegiak_AudioSequencer.baseHz*pitch,3).ToString()+","+Math.Round(begin,3).ToString()+","+Math.Round(length,3).ToString()+";";
     }
 }
@@ -99,7 +98,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
     public void Record(){
         Rtime = 0;
         notes = new List<acegiak_Note>();
-        Debug.Log("STARTED RECORDING");
+        //Debug.Log("STARTED RECORDING");
     }
     public string Print(){
         string ret = "";
@@ -114,11 +113,11 @@ public class acegiak_AudioSequencer : MonoBehaviour
         if(time != null && notes != null){
             foreach(acegiak_Note note in notes){
                 if(note.begin > time && note.begin < time+Time.deltaTime){
-                    Debug.Log("start note");
+                    //Debug.Log("start note");
                     note.Play();
                 }
                 if(note.begin+note.length > time && note.begin+note.length < time+Time.deltaTime){
-                    Debug.Log("stop note");
+                    //Debug.Log("stop note");
                     note.Stop();
                 }
             }
@@ -140,7 +139,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
                     note.volume = recordVolume;
                     note.Play();
                     notes.Add(note);
-                    Debug.Log("START: "+i );
+                    //Debug.Log("START: "+i );
                 }
                 if (Input.GetKeyUp(i)){
                     foreach(acegiak_Note note in notes){
@@ -148,7 +147,7 @@ public class acegiak_AudioSequencer : MonoBehaviour
                             note.length = rtime - note.begin;
                             note.Stop();
 
-                            Debug.Log("END: "+i );
+                            //Debug.Log("END: "+i );
                         }
                     }
                 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using XRL.UI;
 using XRL.World.Effects;
 using RuntimeAudioClipLoader;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using XRL;
@@ -15,6 +14,7 @@ using HistoryKit;
 using XRL.Language;
 using System.Text;
 using Qud.API;
+using FactionInfo = XRL.World.Faction;
 
 
 namespace XRL.World.Parts
@@ -82,9 +82,15 @@ namespace XRL.World.Parts
 			}
 		}
 
-		public bool HandleEvent(BeforeRenderEvent E){
+		public override bool WantEvent(int ID, int cascade)
+		{
+			return base.WantEvent(ID, cascade) || ID == BeforeRenderEvent.ID;
+		}
+
+		public override bool HandleEvent(BeforeRenderEvent E)
+		{
 			Make();
-			return true;
+			return base.HandleEvent(E);
 		}
 
 		public override bool FireEvent(Event E)
@@ -189,7 +195,7 @@ namespace XRL.World.Parts
                     //IPart.AddPlayerMessage("Effect:"+effect.DisplayName);
 					player.ApplyEffect(effect);
 					}catch(Exception E){
-                        Debug.Log("CAVES OF CHORDS COULD NOT LOAD PLAYER EFFECT: "+song.Effect);                          
+                        Debug.Log("CAVES OF CHORDS COULD NOT LOAD PLAYER EFFECT: "+song.Effect+" [exception: "+E.ToString()+"]");                          
                     }
 			}
 			player.FireEvent(Event.New("PlayedSong", "Object", ParentObject));
@@ -303,7 +309,7 @@ namespace XRL.World.Parts
                 Popup.Show(who.The+who.DisplayNameOnly+who.GetVerb("doesn't")+" know any songs");
                 return null;
             }
-            int num12 = Popup.ShowOptionList(string.Empty, ChoiceList.ToArray(), HotkeyList.ToArray(), 0, "Select a song to play.", 60, bRespectOptionNewlines: false, bAllowEscape: true);
+            int num12 = Popup.ShowOptionList(string.Empty, ChoiceList.ToArray(), HotkeyList.ToArray(), 0, "Select a song to play.", 60, RespectOptionNewlines: false, AllowEscape: true);
             if (num12 < 0)
             {
                 return null;
@@ -401,7 +407,7 @@ namespace XRL.World.Parts
 				}
 				
 				this.SoundName = this.SoundName+":"+tvol.ToString();
-				Debug.Log(this.SoundName);
+				//Debug.Log(this.SoundName);
 			}
 
 

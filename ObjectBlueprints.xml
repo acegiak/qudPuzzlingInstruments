@@ -130,7 +130,6 @@
       <tag Name="musicsounds" Value="inst2_high"/>
       <tag Name="musictiles" Value="items/wind_01.png,items/horn_01.png,items/rattle_03.png,items/wind_02.png,items/wind_03.png,items/horn_02.png,items/horn_03.png"/>
       <tag Name="prefixes" Value="whistl,wind,breez,breath"/>
-      <tag Name="postfixes" Value="whistl,wind,breez,breath"/>
       <tag Name="postfixes" Value="boe"/>
       <tag Name="verbs" Value="blow on,blow into,breathe into,heave into"/>
       <tag Name="parts" Value="tube,pipe,hole,reed,bell"/>
