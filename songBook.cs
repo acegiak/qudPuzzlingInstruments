@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using XRL.UI;
 using XRL.World.Effects;
 using RuntimeAudioClipLoader;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using XRL;
@@ -14,6 +13,7 @@ using XRL.World;
 using System.Linq;
 using HistoryKit;
 using XRL.Language;
+using FactionInfo = XRL.World.Faction;
 
 
 namespace XRL.World.Parts
@@ -43,7 +43,7 @@ namespace XRL.World.Parts
             return XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()._factionMusicTags;
         }
 
-        public string ToString(){
+        public override string ToString(){
             string ret = "SONGS:";
             foreach(acegiak_Song song in Songs){
                 ret += "\n"+song.ToString();
@@ -61,14 +61,14 @@ namespace XRL.World.Parts
                 // Songs = GetBaseSongs().Select(b=>new acegiak);
                 return;
             }
-            Popup.StartThinking("Composing songs...");
+            Loading.SetLoadingStatus("Composing songs...");
             for(int i = Stat.Rnd2.Next(5);i>0;i--){
                 acegiak_Song song = SongOfMyPeople();
                 if(song != null){
                     Songs.Add(song);
                 }
             }
-            Popup.EndThinking();
+            Loading.SetLoadingStatus(null);
         }
 
         public acegiak_Song SongOfMyPeople(){
@@ -115,7 +115,7 @@ namespace XRL.World.Parts
                         song.Name = theme.Replace("the ","")+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
                         break;
                     case 2:
-                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+ FactionInfo.getFormattedName(faction);
                         break;
                     case 3:
                         song.Name = Grammar.Adjectify(FactionFancy)+" "+songwords.GetRandomElement()+" of "+theme;
@@ -130,7 +130,7 @@ namespace XRL.World.Parts
                         song.Name = Grammar.MakePossessive(FactionFancy)+" " + Grammar.Adjectify(song.Themes.GetRandomElement())+" "+songwords.GetRandomElement();
                         break;
                     case 7:
-                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+FactionInfo.getFormattedName(faction);
+                        song.Name = Grammar.Adjectify(themeShort)+" "+songwords.GetRandomElement()+" of "+ FactionInfo.getFormattedName(faction);
                         break;
                 }
                 song.Name = Grammar.MakeTitleCase(song.Name);
@@ -184,7 +184,7 @@ namespace XRL.World.Parts
                                     acegiak_SongMod mod = Activator.CreateInstance(Type.GetType(sample.GetTag("musicmodifier"))) as acegiak_SongMod;
                                     mods.Add(mod);
                                 }catch(Exception E){
-                                    Debug.Log("CAVES OF CHORDS COULD NOT LOAD MUSIC MOD: "+sample.GetTag("musicmodifier"));                          
+                                    Debug.Log("CAVES OF CHORDS COULD NOT LOAD MUSIC MOD: "+sample.GetTag("musicmodifier")+" [Exception: "+E.ToString()+"]");                          
                                 }
                             }
                         }
@@ -235,10 +235,14 @@ namespace XRL.World.Parts
 			base.Register(Object);
         }
 
+        public override bool WantEvent(int ID, int cascade)
+        {
+            return base.WantEvent(ID, cascade) || ID == BeforeRenderEvent.ID;
+        }
 
-		public bool HandleEvent(BeforeRenderEvent E){
+        public override bool HandleEvent(BeforeRenderEvent E){
 			Make();
-            return true;
+            return base.HandleEvent(E);
 		}
 
 		public override bool FireEvent(Event E)
@@ -259,20 +263,19 @@ namespace XRL.World.Parts
 
 
 
-			if(E.ID == "ShowConversationChoices" && !ParentObject.IsPlayer()){
-				if(XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null && XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music")){
-                    //IPart.AddPlayerMessage("My tags are:"+String.Join(", ",FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
 
-					if(this.Songs.Count > 0 && !this.learnedFrom ){
-                        
+            if (E.ID == "ShowConversationChoices" && !ParentObject.IsPlayer()){
+                if (XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>()!= null && XRLCore.Core.Game.Player.Body.HasSkill("acegiak_Customs_Music")){
+                    //IPart.AddPlayerMessage("My tags are:" + String.Join(", ", FactionTags(ParentObject.pBrain.GetPrimaryFaction()).ToArray()));
+
+                    if (this.Songs.Count > 0 && !this.learnedFrom ){
 						if(E.GetParameter<ConversationNode>("CurrentNode") != null && E.GetParameter<ConversationNode>("CurrentNode") is WaterRitualNode){
 
-							WaterRitualNode wrnode = E.GetParameter<ConversationNode>("CurrentNode") as WaterRitualNode;
+                            WaterRitualNode wrnode = E.GetParameter<ConversationNode>("CurrentNode") as WaterRitualNode;
 							List<ConversationChoice> Choices = E.GetParameter<List<ConversationChoice>>("Choices") as List<ConversationChoice>;
 
 							if(Choices.Where(b=>b.ID == "LearnSong").Count() <= 0){
-
-								bool canlearn = XRLCore.Core.Game.PlayerReputation.get(ParentObject.pBrain.GetPrimaryFaction()) >50;
+                                bool canlearn = XRLCore.Core.Game.PlayerReputation.get(ParentObject.pBrain.GetPrimaryFaction()) >= 50;
 
 								ConversationChoice conversationChoice = new ConversationChoice();
 								conversationChoice.Text = (canlearn?"&G":"&K")+"Teach me to play &W"+this.Songs[0].Name+(canlearn?"&g":"&K")+" ["+(canlearn?"&C":"&r")+"-50"+(canlearn?"&g":"&K")+" reputation]";
@@ -286,11 +289,11 @@ namespace XRL.World.Parts
 										return false;
 									}
                                     XRLCore.Core.Game.Player.Body.GetPart<acegiak_SongBook>().Songs.Add(this.Songs[0]);
-									this.learnedFrom = true;
+                                    this.learnedFrom = true;
 									Popup.Show("You learned to play "+this.Songs[0].Name);
 
 									JournalAPI.AddAccomplishment("You learned to play "+this.Songs[0].Name);
-									JournalAPI.AddObservation(FactionInfo.getFormattedName(ParentObject.pBrain.GetPrimaryFaction())+" play a song called \""+this.Songs[0].Name+"\"",this.Songs[0].Name,"Songs",null,null,true);
+									JournalAPI.AddObservation(Faction.getFormattedName(ParentObject.pBrain.GetPrimaryFaction())+" play a song called \""+this.Songs[0].Name+"\"",this.Songs[0].Name,"Songs",null,null,true);
 									XRLCore.Core.Game.PlayerReputation.modify(Factions.get(ParentObject.pBrain.GetPrimaryFaction()).Name, -50,false);
 
 									return true;
@@ -307,6 +310,54 @@ namespace XRL.World.Parts
 				}
 			}
             return base.FireEvent(E);
+        }
+
+        // Serialize the player's songs when the game is saved
+        public override void SaveData(SerializationWriter Writer)
+        {
+            base.SaveData(Writer);
+            Writer.Write(Songs.Count);
+            foreach (acegiak_Song song in Songs)
+            {
+                Writer.Write(song.Name);
+                Writer.Write(song.Notes);
+                Writer.Write(song.Faction);
+                Writer.Write(song.Effect);
+                if (song.Themes != null && song.Themes.Count > 0)
+                {
+                    Writer.Write(String.Join(",", song.Themes.ToArray()));
+                }
+                else
+                {
+                    Writer.Write(string.Empty);
+                }
+            }
+        }
+
+        // Load the player's SongBook when the save is reloaded
+        public override void LoadData(SerializationReader Reader)
+        {
+            base.LoadData(Reader);
+            Songs.Clear();
+            int songCount = Reader.ReadInt32();
+            for (int i = 0; i < songCount; i++)
+            {
+                acegiak_Song song = new acegiak_Song();
+                song.Name = Reader.ReadString();
+                song.Notes = Reader.ReadString();
+                song.Faction = Reader.ReadString();
+                song.Effect = Reader.ReadString();
+                string themes = Reader.ReadString();
+                if (string.IsNullOrEmpty(themes))
+                {
+                    song.Themes = new List<string>();
+                }
+                else
+                {
+                    song.Themes = themes.Split(',').ToList();
+                }
+                Songs.Add(song);
+            }
         }
 
 

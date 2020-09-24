@@ -16,7 +16,7 @@ namespace XRL.UI
         public static string CustomRender(acegiak_ScreenBufferMaker sbMaker,  int width, int height)
         {
             GameManager.Instance.PushGameView("Popup:AskString");
-            PauseThinking();
+            Loading.SetHideLoadStatus(hidden: true);
             string Return = "";
             int StartingLine = 0;
             ScrapBuffer.Copy(TextConsole.CurrentBuffer);
@@ -42,7 +42,7 @@ namespace XRL.UI
                         Keyboard.ClearInput();
                         GameManager.Instance.PopGameView(true);
                         _TextConsole.DrawBuffer(ScrapBuffer2,null,true);
-                        ResumeThinking();
+                        Loading.SetHideLoadStatus(hidden: false);
                         return Return;
                     
                 }
@@ -67,7 +67,7 @@ namespace XRL.UI
                         Keyboard.ClearInput();
                         GameManager.Instance.PopGameView(true);
                         _TextConsole.DrawBuffer(ScrapBuffer2, null, true);
-                        ResumeThinking();
+                        Loading.SetHideLoadStatus(hidden: false);
                         return ""; //escape 
                     
                 }
@@ -87,7 +87,7 @@ namespace XRL.UI
             Keyboard.ClearInput();
             GameManager.Instance.PopGameView(true);
             _TextConsole.DrawBuffer(ScrapBuffer2, null, true);
-            ResumeThinking();
+            Loading.SetHideLoadStatus(hidden: false);
 
             return Return;
         }

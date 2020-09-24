@@ -3,7 +3,6 @@ using UnityEngine;
 using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using System.IO;
-using System.Collections.Generic;
 using XRL.World;
 
 namespace XRL.World.Parts
@@ -11,7 +10,7 @@ namespace XRL.World.Parts
 [Serializable]
 public class acegiak_Song: IPart{
 
-    public string Name;
+    public new string Name;
     
     public string Notes;
 
@@ -21,7 +20,7 @@ public class acegiak_Song: IPart{
 
     public List<string> Themes;
 
-    public string ToString(){
+    public override string ToString(){
         return Name+": "+Notes;
     }
 
